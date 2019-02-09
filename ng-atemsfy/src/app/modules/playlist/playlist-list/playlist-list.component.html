@@ -1,15 +1,19 @@
-<div *ngFor="let playlist of my_playlists" style="border: 1px solid black; margin: 5px; padding: 5px;">
-	<img *ngFor="let image of playlist.images" [src]="image.url" style="width: 150px; height: 150px;">
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">collaborative:</b> {{ playlist.collaborative }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">external_urls:</b> {{ playlist.external_urls }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">href:</b> {{ playlist.href }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">id:</b> {{ playlist.id }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">name:</b> {{ playlist.name }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">owner:</b> {{ playlist.owner.display_name }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">primary_color:</b> {{ playlist.primary_color }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">public:</b> {{ playlist.public }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">snapshot_id:</b> {{ playlist.snapshot_id }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">tracks:</b> {{ playlist.tracks.total }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">type:</b> {{ playlist.type }}</p>
-	<p style="margin: 0px;"><b style="text-transform: capitalize;">uri:</b> {{ playlist.uri }}</p>
+<div class="list">
+	<div class="filter">
+		<mat-button-toggle-group [(ngModel)]="playlists_filter.owner">
+			<mat-button-toggle value="all">All</mat-button-toggle>
+			<mat-button-toggle value="by_me">By Me</mat-button-toggle>
+			<mat-button-toggle value="by_spotify">By Spotify</mat-button-toggle>
+		</mat-button-toggle-group>
+	</div>
+
+	<div *ngFor="let playlist of my_playlists">
+		<mat-card *ngIf="filterPlaylist(playlist)" matRipple routerLink="/playlist/{{ playlist.id }}">
+			<mat-card-header>
+				<div mat-card-avatar *ngIf="playlist.images.length > 0" [style.backgroundImage]="'url('+playlist.images[0].url+')'" class="playlist-image"></div>
+				<mat-card-title>{{ playlist.name }}</mat-card-title>
+				<mat-card-subtitle>Owner: {{ playlist.owner.display_name }}</mat-card-subtitle>
+			</mat-card-header>
+		</mat-card>
+	</div>
 </div>

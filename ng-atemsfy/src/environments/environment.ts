@@ -14,7 +14,11 @@ export const environment = {
     urls: {
         access_token: () => { return `https://accounts.spotify.com/authorize?client_id=${environment.client_id}&response_type=${environment.response_type}&redirect_uri=${environment.redirect_uri}&state=${environment.state}&scope=${environment.scope}` },
         me: () => { return `https://api.spotify.com/v1/me` },
+
+        // playslist
         user_playlists: (user_id, params) => { return `https://api.spotify.com/v1/users/${user_id}/playlists?${params}` },
+        playlist_details: (playlist_id) => { return `https://api.spotify.com/v1/playlists/${playlist_id}` },
+
     	search_all: (q) => { return `https://api.spotify.com/v1/search?type=album,artist,playlist,track&market=PL&q=${q}` }
     }
 };

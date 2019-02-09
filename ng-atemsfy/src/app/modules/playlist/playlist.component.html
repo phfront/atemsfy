@@ -1,0 +1,57 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+
+	<mat-toolbar color="primary" class="example-toolbar">
+
+		<img matRipple class="logo" src="assets/images/logo.png" (click)="snav.toggle()">
+
+		<h1 class="example-app-name">Atemsfy playslist manager</h1>
+
+	</mat-toolbar>
+
+	<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+		
+		<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+			
+			<app-playlist-list></app-playlist-list>
+
+		</mat-sidenav>
+
+		<mat-sidenav-content>
+
+			<router-outlet></router-outlet>
+
+		</mat-sidenav-content>
+
+	</mat-sidenav-container>
+
+</div>
+
+<!-- <div class="header">
+	
+	<img class="logo" src="assets/images/logo.png">
+	
+	<div class="title">
+		Atemsfy playslist manager
+	</div>
+
+	<div class="spacer"></div>
+
+	<div class="menu">
+		menu
+	</div>
+
+</div>
+
+<div class="body">
+
+	<div class="side-list">
+		
+	</div>
+
+	<div class="content">
+		content
+	</div>
+
+</div>
+
+ -->

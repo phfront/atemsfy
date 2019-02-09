@@ -34,16 +34,21 @@ export class SpotifyService {
 		)
 	}
 
-	getCurrentUserPlaylists(params = {}) {
-		return this.http.get(environment.urls.user_playlists(sessionStorage.user_id, this.dictParamsToQuerystring(params)), this.getHeader())
-	}
-
 	search(query) {
 		return this.http.get(environment.urls.search_all(query), this.getHeader());
 	}
 
 	dictParamsToQuerystring(dict) {
 		return Object.keys(dict).map(key => `${key}=${dict[key]}`).join('&');
+	}
+
+	// playlist
+	getCurrentUserPlaylists(params = {}) {
+		return this.http.get(environment.urls.user_playlists(sessionStorage.user_id, this.dictParamsToQuerystring(params)), this.getHeader())
+	}
+
+	getPlaylistDetails(playlist_id) {
+		return this.http.get(environment.urls.playlist_details(playlist_id), this.getHeader())
 	}
 
 }

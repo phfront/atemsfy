@@ -1,0 +1,28 @@
+.list {
+	margin-top: 10px;
+	width: 500px;
+
+	@media screen and (max-width: 500px) {
+		width: inherit;
+		float: none;
+	}
+}
+
+.filter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+mat-card {
+	cursor: pointer;
+}
+
+mat-card-subtitle {
+	margin-bottom: 0px;
+}
+
+.playlist-image {
+	background-size: cover;
+}
