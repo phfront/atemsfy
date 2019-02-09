@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { environment } from '../../../../../environments/environment';
-import { SpotifyService } from '../../../../core/services/spotify/spotify.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-redirect',
@@ -11,26 +9,15 @@ import { SpotifyService } from '../../../../core/services/spotify/spotify.servic
 export class RedirectComponent implements OnInit {
 
 	constructor(
-		public route: ActivatedRoute,
 		public router: Router,
-		public spotifyService: SpotifyService
 	) { }
 
 	ngOnInit() {
 		let params = {};
-		this.router.url.split('?')[1].split('&').map(item => { return item.split('=') } ).forEach(param => {
-			params[param[0]] = param[1];
+		this.router.url.split('#')[1].split('&').map(item => { return item.split('=') } ).forEach(param => {
+			sessionStorage[param[0]] = param[1];
 		});
-		console.log(params);
-		this.spotifyService.getToken(params['code']).subscribe(
-			response => {
-				console.log(response);
-			},
-			error => {
-				console.log(error);
-			}
-		)
-		// this.router.navigate(['home']);
+		this.router.navigate(['home']);
 	}
 
 }

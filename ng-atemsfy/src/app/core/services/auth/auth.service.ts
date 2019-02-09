@@ -7,10 +7,12 @@ import { environment } from '../../../../environments/environment';
 })
 export class AuthService {
 
-	constructor() { }
+	constructor(
+		public http: HttpClient
+	) { }
 
 	auth() {
-		window.location.replace(environment.urls.get_code());
+		window.location.replace(environment.urls.access_token());
 	}
 
 }

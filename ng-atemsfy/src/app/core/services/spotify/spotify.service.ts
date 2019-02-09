@@ -11,16 +11,7 @@ export class SpotifyService {
 		public http: HttpClient
 	) { }
 
-
-	public getHeader(type = '') {
-		if (type === 'base64') {
-			return {
-				headers: new HttpHeaders({
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Authorization': 'Basic ' + btoa(environment.client_id + ':' + environment.client_secret)
-				})
-			}
-		}
+	public getHeader() {
 		return {
 			headers: new HttpHeaders({
 				'Authorization': 'Bearer ' + sessionStorage.access_token
@@ -28,16 +19,31 @@ export class SpotifyService {
 		}
 	}
 
-	search(type, query) {
-		return this.http.get(environment.urls.search(type, query), this.getHeader());
+	getCurrentUser() {
+		return this.http.get(environment.urls.me(), this.getHeader());
 	}
 
-	getToken(code) {
-		return this.http.post(environment.urls.get_token(), {
-			"grant_type": environment.grant_type,
-			"redirect_uri": "http://localhost:4200/home",
-			"code": code
-		}, this.getHeader('base64'));
+	setCurrentUserInfo() {
+		this.getCurrentUser().subscribe(
+			response => {
+				sessionStorage.user_id = response['id'];
+			},
+			error => {
+				console.log(error);
+			}
+		)
+	}
+
+	getCurrentUserPlaylists(params = {}) {
+		return this.http.get(environment.urls.user_playlists(sessionStorage.user_id, this.dictParamsToQuerystring(params)), this.getHeader())
+	}
+
+	search(query) {
+		return this.http.get(environment.urls.search_all(query), this.getHeader());
+	}
+
+	dictParamsToQuerystring(dict) {
+		return Object.keys(dict).map(key => `${key}=${dict[key]}`).join('&');
 	}
 
 }

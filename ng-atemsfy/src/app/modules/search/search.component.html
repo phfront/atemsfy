@@ -1,0 +1,42 @@
+<input type="text" name="search_q" [(ngModel)]="search_q" (keyup)="search($event)">
+<button (click)="search(false)">Search</button>
+
+<div *ngIf="results.albums">
+	<h1>albums</h1>
+	<div style="display: flex; flex-wrap: wrap;">
+		<div *ngFor="let album of results.albums.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+			<img *ngFor="let image of album.images" [src]="image.url" style="width: 50px; height: 50px;">
+			<p>{{ album.name }}</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="results.artists">
+	<h1>artists</h1>
+	<div style="display: flex; flex-wrap: wrap;">
+		<div *ngFor="let artist of results.artists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+			<img *ngFor="let image of artist.images" [src]="image.url" style="width: 50px; height: 50px;">
+			<p>{{ artist.name }}</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="results.playlists">
+	<h1>playlists</h1>
+	<div style="display: flex; flex-wrap: wrap;">
+		<div *ngFor="let playlist of results.playlists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+			<img *ngFor="let image of playlist.images" [src]="image.url" style="width: 50px; height: 50px;">
+			<p>{{ playlist.name }}</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="results.tracks">
+	<h1>tracks</h1>
+	<div style="display: flex; flex-wrap: wrap;">
+		<div *ngFor="let track of results.tracks.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+			<img *ngFor="let image of track.album.images" [src]="image.url" style="width: 50px; height: 50px;">
+			<p>{{ track.name }}</p>
+		</div>
+	</div>
+</div>

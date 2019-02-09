@@ -1,3 +1,17 @@
-<p>
-  home works!
-</p>
+<div *ngIf="currentUser !== undefined">
+	<img *ngFor="let image of currentUser.images" [src]="image.url">
+	<p><b style="text-transform: capitalize;">birthdate:</b> {{ currentUser.birthdate }}</p>
+	<p><b style="text-transform: capitalize;">country:</b> {{ currentUser.country }}</p>
+	<p><b style="text-transform: capitalize;">display_name:</b> {{ currentUser.display_name }}</p>
+	<p><b style="text-transform: capitalize;">email:</b> {{ currentUser.email }}</p>
+	<p><b style="text-transform: capitalize;">external_urls:</b> {{ currentUser.external_urls }}</p>
+	<p><b style="text-transform: capitalize;">followers:</b> {{ currentUser.followers.href }} / {{ currentUser.followers.total }}</p>
+	<p><b style="text-transform: capitalize;">href:</b> {{ currentUser.href }}</p>
+	<p><b style="text-transform: capitalize;">id:</b> {{ currentUser.id }}</p>
+	<p><b style="text-transform: capitalize;">product:</b> {{ currentUser.product }}</p>
+	<p><b style="text-transform: capitalize;">type:</b> {{ currentUser.type }}</p>
+	<p><b style="text-transform: capitalize;">uri:</b> {{ currentUser.uri }}</p>
+
+	<br>
+	<button routerLink="/playlist/playlist-list">Playlists</button>
+</div>
