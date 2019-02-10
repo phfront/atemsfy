@@ -2,28 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../core/services/spotify/spotify.service';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-	currentUser: any = undefined;
+    currentUser: any = undefined;
 
-	constructor(
-		public spotifyService: SpotifyService
-	) { }
+    constructor(
+        public spotifyService: SpotifyService
+    ) { }
 
-	ngOnInit() {
-		this.spotifyService.setCurrentUserInfo();
-		this.spotifyService.getCurrentUser().subscribe(
-			response => {
-				this.currentUser = response;
-			},
-			error => {
-				console.log(error);
-			}
-		)
-	}
+    ngOnInit() {
+        this.spotifyService.setCurrentUserInfo();
+        this.spotifyService.get('current_user', {}).subscribe(
+            response => {
+                this.currentUser = response;
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
 
 }

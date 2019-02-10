@@ -3,16 +3,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
 
-	constructor(
-		public http: HttpClient
-	) { }
+    constructor(
+        public http: HttpClient
+    ) { }
 
-	auth() {
-		window.location.replace(environment.urls.access_token());
-	}
+    auth() {
+        let url = environment.urls.access_token();
+        url += `?client_id=${environment.client_id}`;
+        url += `&response_type=${environment.response_type}`;
+        url += `&redirect_uri=${environment.redirect_uri}`;
+        url += `&state=${environment.state}`;
+        url += `&scope=${environment.scope}`;
+        window.location.replace(url);
+    }
 
 }
