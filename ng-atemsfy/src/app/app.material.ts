@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import {
 	MatButtonModule,
 	MatCheckboxModule,
@@ -22,7 +23,8 @@ import {
 		MatRippleModule,
 		MatMenuModule,
 		MatCardModule,
-		MatButtonToggleModule
+		MatButtonToggleModule,
+		DragDropModule
 	],
 	exports: [
 		MatButtonModule,
@@ -32,7 +34,8 @@ import {
 		MatRippleModule,
 		MatMenuModule,
 		MatCardModule,
-		MatButtonToggleModule
+		MatButtonToggleModule,
+		DragDropModule
 	],
 })
 export class AppMaterialModule { }

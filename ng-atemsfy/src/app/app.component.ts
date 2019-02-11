@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -7,7 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'ng-atemsfy';
+	remaining_session_time;
 
-	constructor() { }
+	constructor(
+		public router: Router
+	) {
+		setInterval(() => {
+			this.updateRemainingSessionTime();
+		}, 1000)
+	}
+
+	updateRemainingSessionTime() {
+		let time = (Number(sessionStorage.session_time) + (Number(sessionStorage.expires_in) * 1000)) - new Date().getTime();
+		time /= 1000;
+		this.remaining_session_time = time.toFixed(0);
+	}
 
 }

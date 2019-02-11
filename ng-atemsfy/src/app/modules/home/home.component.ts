@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../core/services/spotify/spotify.service';
 
+import { Observable, throwError, Subject } from 'rxjs';
+import { catchError, tap, debounceTime } from 'rxjs/operators';
+
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',

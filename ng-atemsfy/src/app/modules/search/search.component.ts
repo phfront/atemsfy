@@ -28,8 +28,8 @@ export class SearchComponent implements OnInit {
         }
         this.spotifyService.get('search', {}, {
             type: 'album,artist,playlist,track',
-            market: 'PL',
-            q: this.search_q
+            market: 'PL'//,
+            // q: this.search_q
         }).subscribe(
             response => {
                 this.results = response;

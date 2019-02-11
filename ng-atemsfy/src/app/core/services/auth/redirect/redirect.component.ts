@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from '../../../../app.component';
 
 @Component({
     selector: 'app-redirect',
@@ -16,6 +17,7 @@ export class RedirectComponent implements OnInit {
         this.router.url.split('#')[1].split('&').map(item => item.split('=') ).forEach(param => {
             sessionStorage[param[0]] = param[1];
         });
+        sessionStorage.session_time = new Date().getTime();
         this.router.navigate(['home']);
     }
 
