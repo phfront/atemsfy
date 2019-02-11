@@ -9,13 +9,18 @@ import {
 	MatRippleModule,
 	MatMenuModule,
 	MatCardModule,
-	MatButtonToggleModule
+	MatButtonToggleModule,
+	MatTabsModule,
+	MatIconModule,
+	MatFormFieldModule,
+	MatInputModule
 } from '@angular/material';
 
 @NgModule({
 	imports: [
 		BrowserAnimationsModule,
 
+		DragDropModule,
 		MatButtonModule,
 		MatCheckboxModule,
 		MatToolbarModule,
@@ -24,9 +29,13 @@ import {
 		MatMenuModule,
 		MatCardModule,
 		MatButtonToggleModule,
-		DragDropModule
+		MatTabsModule,
+		MatIconModule,
+		MatFormFieldModule,
+		MatInputModule
 	],
 	exports: [
+		DragDropModule,
 		MatButtonModule,
 		MatCheckboxModule,
 		MatToolbarModule,
@@ -35,7 +44,10 @@ import {
 		MatMenuModule,
 		MatCardModule,
 		MatButtonToggleModule,
-		DragDropModule
+		MatTabsModule,
+		MatIconModule,
+		MatFormFieldModule,
+		MatInputModule
 	],
 })
 export class AppMaterialModule { }

@@ -31,7 +31,6 @@ export class PlaylistListComponent implements OnInit {
                 if (response['next'] !== null) {
                     this.getMyPlaylists(this.spotifyService.querystringToJson(response['next']));
                 }
-                console.log(this.my_playlists);
             },
             error => {
                 console.log(error);
