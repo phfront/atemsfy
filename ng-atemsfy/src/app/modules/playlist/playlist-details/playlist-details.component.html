@@ -23,6 +23,7 @@
 					(cdkDropListDropped)="drop($event)">
 					<div class="example-box" *ngFor="let item of available_tracks" cdkDrag>
 						{{ item.name }}
+						<mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>add</mat-icon>
 						<mat-card *cdkDragPreview>
 							<mat-card-title>{{ item.name }}</mat-card-title>
 							<img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
@@ -48,8 +49,9 @@
 					[cdkDropListConnectedTo]="[]"
 					class="example-list"
 					(cdkDropListDropped)="drop($event)">
-					<div class="example-box" *ngFor="let item of playlistsTracksFilter()" cdkDrag (click)="removeTrackFromPlaylist(item)">
+					<div class="example-box" *ngFor="let item of playlistsTracksFilter()" cdkDrag>
 						{{ item.name }}
+						<mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" (click)="removeTrackFromPlaylist(item)" matRipple>delete</mat-icon>
 						<mat-card *cdkDragPreview>
 							<mat-card-title>{{ item.name }}</mat-card-title>
 							<img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">

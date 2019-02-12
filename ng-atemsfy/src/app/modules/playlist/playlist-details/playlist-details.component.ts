@@ -44,11 +44,30 @@ export class PlaylistDetailsComponent implements OnInit {
             response => {
                 this.playlist = response;
                 this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
+                if (this.playlist.tracks.next) {
+                    this.getNextPlaylistTracks(this.playlist.tracks.next);
+                }
             },
             error => {
                 console.log(error);
             }
         );
+    }
+
+    getNextPlaylistTracks(url) {
+        if (this.playlist.tracks.next) {
+            this.spotifyService.get(url, {}).subscribe(
+                response => {
+                    this.playlists_tracks = this.playlists_tracks.concat(response.items.map(item => item.track));
+                    if (response.next) {
+                        this.getNextPlaylistTracks(response.next);
+                    }
+                },
+                error => {
+                    console.log(error);
+                }
+            );
+        }
     }
 
     initSearch() {
@@ -64,6 +83,7 @@ export class PlaylistDetailsComponent implements OnInit {
             this.spotifyService.get('search', {}, {
                 type: 'track',
                 market: 'PL',
+                limit: 40,
                 q: this.available_tracks_search.value
             }).subscribe(
                 response => {

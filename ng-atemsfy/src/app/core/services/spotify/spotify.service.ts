@@ -38,12 +38,17 @@ export class SpotifyService {
     }
 
     url(endpoint, urlParams, getParams = {}) {
-        let url = environment.urls[endpoint](urlParams);
-        if (Object.keys(getParams).length > 0) {
-            const querystring = this.dictParamsToQuerystring(getParams);
-            url += `?${querystring}`;
+        let _url = environment.urls[endpoint]
+        if (_url) {
+            _url = _url(urlParams);
+            if (Object.keys(getParams).length > 0) {
+                const querystring = this.dictParamsToQuerystring(getParams);
+                _url += `?${querystring}`;
+            }
+            return _url;
+        } else {
+            return endpoint;
         }
-        return url;
     }
 
     get(endpoint, urlParams, getParams = {}) {
