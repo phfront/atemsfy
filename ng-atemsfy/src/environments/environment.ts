@@ -34,8 +34,9 @@ export const environment = {
         access_token: () => `https://accounts.spotify.com/authorize`,
         current_user: () => `https://api.spotify.com/v1/me`,
         user_playlists: (params) => `https://api.spotify.com/v1/users/${params.user_id}/playlists`,
-        playlist_details: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}`,
-        search: () => `https://api.spotify.com/v1/search`
+        playlist: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}`,
+        search: () => `https://api.spotify.com/v1/search`,
+        playlists_tracks: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}/tracks`
     }
 };
 

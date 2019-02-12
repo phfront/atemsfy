@@ -15,11 +15,12 @@ export class SpotifyService {
         public router: Router
     ) { }
 
-    getHeader() {
+    getHeader(body = {}) {
         return {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + sessionStorage.access_token
-            })
+            }),
+            body: body
         };
     }
 
@@ -81,10 +82,10 @@ export class SpotifyService {
         );
     }
 
-    delete(endpoint, urlParams) {
+    delete(endpoint, urlParams, object) {
         const url = this.url(endpoint, urlParams);
         const args = arguments;
-        return this.http.delete<any>(url, this.getHeader()).pipe(
+        return this.http.delete<any>(url, this.getHeader(object)).pipe(
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );
@@ -92,10 +93,14 @@ export class SpotifyService {
 
     handleError<T>(endpoint, result?: T) {
         return (error: any): Observable<T> => {
-            if (error.error.error.status === 401) { // access token expired
-                alert('Sessão expirada, por favor faça login novamente!');
-                this.router.navigate(['/']);
+            console.log(error);
+            try {
+                if (error.error.error.status === 401) { // access token expired
+                    alert('Sessão expirada, por favor faça login novamente!');
+                    this.router.navigate(['/']);
+                }
             }
+            catch (err) { }
             return throwError(error); // Let the app keep running by returning an empty result.
         };
     }

@@ -33,16 +33,20 @@ export class PlaylistDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(
             params => {
-                this.spotifyService.get('playlist_details', params).subscribe(
-                    response => {
-                        this.playlist = response;
-                        this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
-                        this.initSearch();
-                    },
-                    error => {
-                        console.log(error);
-                    }
-                );
+                this.getPlayslist(params);
+                this.initSearch();
+            }
+        );
+    }
+
+    getPlayslist(params) {
+        this.spotifyService.get('playlist', params).subscribe(
+            response => {
+                this.playlist = response;
+                this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
+            },
+            error => {
+                console.log(error);
             }
         );
     }
@@ -88,11 +92,32 @@ export class PlaylistDetailsComponent implements OnInit {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {
-            transferArrayItem(event.previousContainer.data,
-                            event.container.data,
-                            event.previousIndex,
-                            event.currentIndex);
+            transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+            this.addTrackToPlaystist(this.playlists_tracks[event.currentIndex]);
         }
+    }
+
+    addTrackToPlaystist(track) {
+        this.spotifyService.post('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
+            response => {
+                console.log(response);
+            },
+            error => {
+                console.log(error);
+            }
+        )
+    }
+        
+        removeTrackFromPlaylist(track) {
+            this.spotifyService.delete('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
+            response => {
+                console.log(response);
+                this.getPlayslist({ playlist_id: this.playlist.id }); // substituir para getPlaylistTracks
+            },
+            error => {
+                console.log(error);
+            }
+        )
     }
 
 }

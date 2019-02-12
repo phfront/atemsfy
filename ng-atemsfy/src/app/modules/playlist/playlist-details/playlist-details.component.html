@@ -5,6 +5,7 @@
 		<div class="container-drag-drop">
 	
 			<div class="item-drag-drop">
+				
 				<h2>1</h2>
 
 				<mat-form-field class="input-search">
@@ -28,6 +29,7 @@
 						</mat-card>
 					</div>
 				</div>
+			
 			</div>
 	
 			<div class="item-drag-drop">
@@ -43,10 +45,10 @@
 				<div cdkDropList
 					#playlists_tracks_list="cdkDropList"
 					[cdkDropListData]="playlists_tracks"
-					[cdkDropListConnectedTo]="[available_tracks_list]"
+					[cdkDropListConnectedTo]="[]"
 					class="example-list"
 					(cdkDropListDropped)="drop($event)">
-					<div class="example-box" *ngFor="let item of playlistsTracksFilter()" cdkDrag>
+					<div class="example-box" *ngFor="let item of playlistsTracksFilter()" cdkDrag (click)="removeTrackFromPlaylist(item)">
 						{{ item.name }}
 						<mat-card *cdkDragPreview>
 							<mat-card-title>{{ item.name }}</mat-card-title>
