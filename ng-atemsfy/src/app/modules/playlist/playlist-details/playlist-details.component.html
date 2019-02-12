@@ -1,15 +1,15 @@
 <mat-tab-group>
 	
-	<mat-tab label="Tracks">
+	<mat-tab label="Músicas">
 	
 		<div class="container-drag-drop">
 	
 			<div class="item-drag-drop">
 				
-				<h2>1</h2>
+				<h3>Músicas do Spotify</h3>
 
 				<mat-form-field class="input-search">
-					<input matInput type="text" placeholder="Search" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()">
+					<input matInput type="text" placeholder="Pesquisa" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()">
 					<button mat-button *ngIf="available_tracks_search.value" matSuffix mat-icon-button aria-label="Clear" (click)="available_tracks_search.value=''">
 						<mat-icon>close</mat-icon>
 					</button>
@@ -20,10 +20,19 @@
 					[cdkDropListData]="available_tracks"
 					[cdkDropListConnectedTo]="[playlists_tracks_list]"
 					class="example-list"
-					(cdkDropListDropped)="drop($event)">
-					<div class="example-box" *ngFor="let item of available_tracks" cdkDrag>
-						{{ item.name }}
-						<mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>add</mat-icon>
+                    (cdkDropListDropped)="drop($event)">
+					<div *ngFor="let item of available_tracks" cdkDrag>
+
+                        <div class="track">
+                            <img [src]="item.album.images[0].url" [alt]="item.name" />
+                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
+                            <!-- <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon> -->
+                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
+                            <div class="mat-h3 track-name">{{ item.name }}</div>
+                            <!-- <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>close</mat-icon> -->
+                            <!-- <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>chevron_right</mat-icon> -->
+                        </div>
+                        
 						<mat-card *cdkDragPreview>
 							<mat-card-title>{{ item.name }}</mat-card-title>
 							<img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
@@ -34,10 +43,10 @@
 			</div>
 	
 			<div class="item-drag-drop">
-				<h2>2</h2>
+				<h3>Músicas da Playlist</h3>
 
 				<mat-form-field class="input-search">
-						<input matInput type="text" placeholder="Search" [(ngModel)]="playlists_tracks_search.value">
+						<input matInput type="text" placeholder="Pesquisa" [(ngModel)]="playlists_tracks_search.value">
 						<button mat-button *ngIf="playlists_tracks_search.value" matSuffix mat-icon-button aria-label="Clear" (click)="playlists_tracks_search.value=''">
 							<mat-icon>close</mat-icon>
 						</button>
@@ -48,15 +57,25 @@
 					[cdkDropListData]="playlists_tracks"
 					[cdkDropListConnectedTo]="[]"
 					class="example-list"
-					(cdkDropListDropped)="drop($event)">
-					<div class="example-box" *ngFor="let item of playlistsTracksFilter()" cdkDrag>
-						{{ item.name }}
-						<mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" (click)="removeTrackFromPlaylist(item)" matRipple>delete</mat-icon>
-						<mat-card *cdkDragPreview>
-							<mat-card-title>{{ item.name }}</mat-card-title>
-							<img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
-						</mat-card>
-					</div>
+                    (cdkDropListDropped)="drop($event)">
+                    
+                    <div *ngIf="playlists_tracks.length === 0" class="no-item">
+                        Arraste as músicas aqui
+                    </div>
+
+					<div *ngFor="let item of playlistsTracksFilter()" cdkDrag>
+                        <div class="track">
+                            <img [src]="item.album.images[0].url" [alt]="item.name" />
+                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
+                            <!-- <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon> -->
+                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
+                            <div class="mat-h3 track-name">{{ item.name }}</div>
+                            <!-- <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>close</mat-icon> -->
+                            <mat-icon [class.disabled]="deleting_track" [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple (click)="removeTrackFromPlaylist(item)">delete</mat-icon>
+                        </div>
+						<img *cdkDragPreview class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
+                    </div>
+                    
 				</div>
 			</div>
 	
@@ -64,7 +83,7 @@
 	
 	</mat-tab>
 	
-	<mat-tab label="Details">
+	<mat-tab label="Detalhes">
 
 		<div *ngIf="playlist !== undefined" style="border: 1px solid black; margin: 5px; padding: 5px;">
 			<img *ngFor="let image of playlist.images" [src]="image.url" style="width: 50px; height: 50px;">	

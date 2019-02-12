@@ -25,6 +25,8 @@ export class PlaylistDetailsComponent implements OnInit {
         value: ''
     };
 
+    deleting_track = false;
+
     constructor(
         public spotifyService: SpotifyService,
         public route: ActivatedRoute
@@ -71,13 +73,11 @@ export class PlaylistDetailsComponent implements OnInit {
     }
 
     initSearch() {
-        this.available_tracks_search.observer.pipe(
-            debounceTime(500)
-        ).subscribe(() => this.getAvailableTracks())
+        this.available_tracks_search.observer.pipe(debounceTime(500)).subscribe(() => this.getAvailableTracks());
     }
 
     getAvailableTracks() {
-        if (this.available_tracks_search.value === "") {
+        if (this.available_tracks_search.value === '') {
             this.available_tracks = [];
         } else {
             this.spotifyService.get('search', {}, {
@@ -105,9 +105,9 @@ export class PlaylistDetailsComponent implements OnInit {
             if (track.name.toLowerCase().indexOf(this.playlists_tracks_search.value.toLowerCase()) > -1) {
                 return track;
             }
-        })
+        });
     }
-    
+
     drop(event: CdkDragDrop<string[]>) {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -124,20 +124,28 @@ export class PlaylistDetailsComponent implements OnInit {
             },
             error => {
                 console.log(error);
+                const index = this.playlists_tracks.indexOf(track);
+                this.playlists_tracks.splice(index, 1);
             }
-        )
+        );
     }
-        
-        removeTrackFromPlaylist(track) {
+
+    removeTrackFromPlaylist(track) {
+        if (!this.deleting_track) {
+            this.deleting_track = true;
             this.spotifyService.delete('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
-            response => {
-                console.log(response);
-                this.getPlayslist({ playlist_id: this.playlist.id }); // substituir para getPlaylistTracks
-            },
-            error => {
-                console.log(error);
-            }
-        )
+                response => {
+                    this.deleting_track = false;
+                    console.log(response);
+                    const index = this.playlists_tracks.indexOf(track);
+                    this.playlists_tracks.splice(index, 1);
+                },
+                error => {
+                    this.deleting_track = false;
+                    console.log(error);
+                }
+            );
+        }
     }
 
 }

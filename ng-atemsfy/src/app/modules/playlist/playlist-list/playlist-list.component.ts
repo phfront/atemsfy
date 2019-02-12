@@ -13,7 +13,7 @@ export class PlaylistListComponent implements OnInit {
         my: true,
         collaborative: true,
         public: true,
-        owner: 'all'
+        owner: 'by_me'
     };
 
     constructor(
