@@ -1,4 +1,12 @@
-<div *ngIf="currentUser !== undefined">
+<div class="home-mosaic">
+	<div class="mosaic">
+		<img *ngFor="let img of mosaic_images" [src]="img" >
+	</div>
+</div>
+
+<div class="overlay-shadow"></div>
+
+<div class="home-content" *ngIf="currentUser !== undefined">
 	<!-- <img *ngFor="let image of currentUser.images" [src]="image.url">
 	<p><b style="text-transform: capitalize;">birthdate:</b> {{ currentUser.birthdate }}</p>
 	<p><b style="text-transform: capitalize;">country:</b> {{ currentUser.country }}</p>
@@ -13,5 +21,7 @@
 	<p><b style="text-transform: capitalize;">uri:</b> {{ currentUser.uri }}</p>
 
 	<br> -->
-	<button routerLink="/playlist">Minhas Playlists</button>
+	<button class="atemsfy-button atemsfy-button-primary" routerLink="/playlist">
+		<span class="button-size">Minhas playlists</span>
+	</button>
 </div>

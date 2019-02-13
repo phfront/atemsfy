@@ -27,7 +27,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/button.scss",
+              "src/assets/scss/track.scss"
             ],
             "scripts": []
           },

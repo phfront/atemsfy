@@ -1,0 +1,69 @@
+.atemsfy-button {
+    padding: 10px 20px;
+    border-radius: 100px;
+    position: relative;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: 6px;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.atemsfy-button:hover {
+    opacity: 1;
+}
+
+.atemsfy-button:active {
+    box-shadow: none;
+    top: 6px;
+    margin-bottom: 0;
+}
+
+.atemsfy-button:active, .atemsfy-button:focus {
+    outline: 0;
+}
+
+.atemsfy-button-primary {
+    background: linear-gradient(
+        to bottom,
+        #1de954 0%,
+        #1dd954 17%,
+        #1dc954 33%,
+        #1db954 67%,
+        #1da954 83%,
+        #1d9954 100%
+    );
+    border: 0px;
+    color: white;
+    box-shadow: 0px 6px 0px #1d6954;
+}
+
+.atemsfy-button-secondary {
+    background: linear-gradient(
+        to bottom,
+        #a3a3a3 0%,
+        #939393 17%,
+        #838383 33%,
+        #737373 67%,
+        #636363 83%,
+        #535353 100%
+    );
+    border: 0px;
+    color: white;
+    box-shadow: 0px 6px 0px #434343;
+}
+
+.atemsfy-button-warning {
+    background: linear-gradient(
+        to bottom,
+        #fb1212 0%,
+        #eb1212 17%,
+        #db1212 33%,
+        #cb1212 67%,
+        #bb1212 83%,
+        #ab1212 100%
+    );
+    border: 0px;
+    color: white;
+    box-shadow: 0px 6px 0px #7b1212;
+}

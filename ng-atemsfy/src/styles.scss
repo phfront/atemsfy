@@ -27,36 +27,3 @@ $candy-app-theme: mat-dark-theme($candy-app-primary, $candy-app-accent, $candy-a
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
-
-// custom
-
-.track {
-    display: flex;
-    align-items: center;
-    background: #565656;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
-
-    img {
-        width: 50px;
-        min-width: 50px;
-        height: 50px;
-    }
-
-    mat-icon {
-        cursor: pointer;
-        font-size: 30px;
-        width: 30px;
-        height: 30px;
-    }
-
-    .track-name {
-        margin: 0px;
-        white-space: nowrap; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        flex-grow: 1;
-    }
-
-}

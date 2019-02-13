@@ -36,7 +36,8 @@ export const environment = {
         user_playlists: (params) => `https://api.spotify.com/v1/users/${params.user_id}/playlists`,
         playlist: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}`,
         search: () => `https://api.spotify.com/v1/search`,
-        playlists_tracks: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}/tracks`
+        playlists_tracks: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}/tracks`,
+        user_top: (params) => `https://api.spotify.com/v1/me/top/${params.type}`,
     }
 };
 
