@@ -1,0 +1,58 @@
+$bar-width: 2px;
+$bar-height: 15px;
+$bar-height-bigger: 20px;
+$bar-color: white;
+$bar-space-between: 2px;
+
+.atemsfy-loading {
+    text-align: center;
+}
+
+.atemsfy-loading-text {
+    margin-bottom: 5px;
+}
+
+.atemsfy-loading .line {
+  width: $bar-width;
+  height: $bar-height;
+  background: $bar-color;
+  margin: 0 $bar-space-between;
+  display: inline-block;
+  animation: bar-animation 1000ms infinite ease-in-out;
+}
+
+.atemsfy-loading .line-1 { animation-delay: 900ms; }
+.atemsfy-loading .line-2 { animation-delay: 800ms; }
+.atemsfy-loading .line-3 { animation-delay: 700ms; }
+.atemsfy-loading .line-4 { animation-delay: 600ms; }
+.atemsfy-loading .line-5 { animation-delay: 500ms; }
+.atemsfy-loading .line-6 { animation-delay: 400ms; }
+.atemsfy-loading .line-7 { animation-delay: 300ms; }
+.atemsfy-loading .line-8 { animation-delay: 200ms; }
+.atemsfy-loading .line-9 { animation-delay: 100ms; }
+// .atemsfy-loading .line-10 { animation-delay: 00ms; }
+.atemsfy-loading .line-11 { animation-delay: 100ms; }
+.atemsfy-loading .line-12 { animation-delay: 200ms; }
+.atemsfy-loading .line-13 { animation-delay: 300ms; }
+.atemsfy-loading .line-14 { animation-delay: 400ms; }
+.atemsfy-loading .line-15 { animation-delay: 500ms; }
+.atemsfy-loading .line-16 { animation-delay: 600ms; }
+.atemsfy-loading .line-17 { animation-delay: 700ms; }
+.atemsfy-loading .line-18 { animation-delay: 800ms; }
+.atemsfy-loading .line-19 { animation-delay: 900ms; }
+
+@keyframes bar-animation { 
+  0% { 
+    opacity: 1;
+    height: $bar-height-bigger;
+  }
+  50% { 
+    opacity: 0;
+    height: $bar-height;
+  }
+  100% { 
+    opacity: 1;
+    height: $bar-height-bigger;
+  }  
+
+}

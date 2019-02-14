@@ -1,0 +1,32 @@
+.atemsfy-playlist-list {
+    // background: #535353;
+    color: white;
+}
+
+.atemsfy-playlist {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.atemsfy-playlist img {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.atemsfy-playlist span {
+    margin: 0px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.atemsfy-playlist:hover span {
+    transform: scale(1.04);
+}
+
+.atemsfy-playlist:hover img {
+    transform: scale(1.2);
+}

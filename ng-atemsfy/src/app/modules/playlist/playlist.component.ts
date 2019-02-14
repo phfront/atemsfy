@@ -11,7 +11,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
     public mobileQuery: MediaQueryList;
     private _mobileQueryListener: () => void;
-    mosaic_images = [];
+    mosaic_images;
 
     constructor(
         public changeDetectorRef: ChangeDetectorRef,

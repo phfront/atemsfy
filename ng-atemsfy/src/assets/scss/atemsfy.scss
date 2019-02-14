@@ -3,3 +3,15 @@
 @import 'toolbar.scss';
 @import 'mosaic.scss';
 @import 'content.scss';
+@import 'toggle.scss';
+@import 'playlist.scss';
+@import 'loading.scss';
+
+@font-face {
+    font-family: 'montserrat';
+    src: url('src/assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+* {
+    font-family: montserrat;
+}

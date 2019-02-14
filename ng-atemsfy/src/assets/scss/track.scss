@@ -3,10 +3,14 @@
     display: flex;
     margin: 3px 0px;
     align-items: center;
-    background: #565656;
+    cursor: move;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.track-in-list:hover {
+    background: rgba(29, 185, 84, 0.1);
 }
 
 .track-in-list-image {
@@ -42,11 +46,14 @@
 }
 
 .track-in-list-info-name {
-    font-size: 16px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-in-list-info-time {
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .track-in-list-player {
@@ -62,4 +69,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.track-in-list-player-icon:hover {
+    cursor: pointer;
 }

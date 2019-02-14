@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
     currentUser: any = undefined;
 
-    mosaic_images: Array<any> = [];
+    mosaic_images;
 
     constructor(
         public spotifyService: SpotifyService,

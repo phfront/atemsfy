@@ -19,10 +19,8 @@ export class PlaylistEditorComponent implements OnInit {
         owner: 'by_me'
     };
     playlist: any = undefined;
-
     available_tracks = [];
     playlists_tracks = [];
-
     available_tracks_search = {
         value: '',
         observer: new Subject()
@@ -30,8 +28,14 @@ export class PlaylistEditorComponent implements OnInit {
     playlists_tracks_search = {
         value: ''
     };
-
     deleting_track = false;
+
+    // loadings
+    loading = {
+        playlist: false,
+        playlist_tracks: false,
+        search_tracks: false
+    }
 
     constructor(
         public spotifyService: SpotifyService
@@ -71,12 +75,30 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     getPlaylist(playlist_id) {
+        this.loading.playlist = true;
+        this.playlist = undefined;
         this.spotifyService.get('playlist', { playlist_id: playlist_id }).subscribe(
             response => {
                 this.playlist = response;
-                this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
-                if (this.playlist.tracks.next) {
-                    this.getNextPlaylistTracks(this.playlist.tracks.next);
+                // this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
+                this.loading.playlist_tracks = true;
+                this.getPlaylistTracks('playlists_tracks');
+                this.loading.playlist = false;
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    }
+
+    getPlaylistTracks(url) {
+        this.spotifyService.get(url, { playlist_id: this.playlist.id }, { limit: 50 }).subscribe(
+            response => {
+                this.playlists_tracks = this.playlists_tracks.concat(response.items.map(item => item.track));
+                if (response.next) {
+                    this.getPlaylistTracks(response.next);
+                } else {
+                    this.loading.playlist_tracks = false;
                 }
             },
             error => {
@@ -85,30 +107,15 @@ export class PlaylistEditorComponent implements OnInit {
         );
     }
 
-    getNextPlaylistTracks(url) {
-        if (this.playlist.tracks.next) {
-            this.spotifyService.get(url, {}).subscribe(
-                response => {
-                    this.playlists_tracks = this.playlists_tracks.concat(response.items.map(item => item.track));
-                    if (response.next) {
-                        this.getNextPlaylistTracks(response.next);
-                    }
-                },
-                error => {
-                    console.log(error);
-                }
-            );
-        }
-    }
-
     initSearch() {
-        this.available_tracks_search.observer.pipe(debounceTime(500)).subscribe(() => this.getAvailableTracks());
+        this.available_tracks_search.observer.pipe(debounceTime(300)).subscribe(() => this.getAvailableTracks());
     }
 
     getAvailableTracks() {
         if (this.available_tracks_search.value === '') {
             this.available_tracks = [];
         } else {
+            this.loading.search_tracks = true;
             this.spotifyService.get('search', {}, {
                 type: 'track',
                 market: 'PL',
@@ -117,6 +124,7 @@ export class PlaylistEditorComponent implements OnInit {
             }).subscribe(
                 response => {
                     this.available_tracks = response.tracks.items;
+                    this.loading.search_tracks = false;
                 },
                 error => {
                     console.log(error);

@@ -1,0 +1,59 @@
+.atemsfy-toggle {
+    display: flex;
+}
+
+.atemsfy-toggle-horizontal {
+    flex-direction: row;
+    align-items: center;
+}
+
+.atemsfy-toggle-vertical {
+    flex-direction: column;
+    align-items: center;
+}
+
+.atemsfy-toggle-item {
+    padding: 10px;
+    background: #1db954;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.atemsfy-toggle-horizontal .atemsfy-toggle-item:first-child {
+    border-top-left-radius: 500px;
+    border-bottom-left-radius: 500px;
+}
+
+.atemsfy-toggle-vertical .atemsfy-toggle-item:first-child {
+    border-top-left-radius: 500px;
+    border-top-right-radius: 500px;
+}
+
+.atemsfy-toggle-horizontal .atemsfy-toggle-item:last-child {
+    border-top-right-radius: 500px;
+    border-bottom-right-radius: 500px;
+}
+
+.atemsfy-toggle-vertical .atemsfy-toggle-item:last-child {
+    border-bottom-left-radius: 500px;
+    border-bottom-right-radius: 500px;
+}
+
+.atemsfy-toggle-item:hover {
+    background: #179c46;
+}
+
+.atemsfy-toggle-item:hover {
+    transform: scale(1.1);
+}
+
+.atemsfy-toggle-item:active {
+    background: #0f662e;
+}
+
+.atemsfy-toggle-item-active {
+    background: #158a3e;
+}
