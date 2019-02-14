@@ -8,9 +8,14 @@
     flex-wrap: wrap;
 }
 
-.mosaic img {
+.mosaic div {
     width: 10%;
     height: 10%;
+}
+
+.mosaic div img {
+    width: 100%;
+    height: 100%;
 }
 
 .overlay-shadow {

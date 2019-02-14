@@ -50,8 +50,8 @@ export class HomeComponent implements OnInit {
         );
     }
 
-    shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
+    shuffle(array: Array<any>) {
+        let currentIndex = array.length, temporaryValue, randomIndex;
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
@@ -60,6 +60,10 @@ export class HomeComponent implements OnInit {
             array[randomIndex] = temporaryValue;
         }
         return array;
+    }
+
+    getMosaicSize() {
+        return (window.innerWidth / 10) + 'px';
     }
 
 }

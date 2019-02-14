@@ -14,6 +14,7 @@ import { PlaylistRoutingModule } from './playlist-routing.module';
 
 // material
 import { AppMaterialModule } from '../../app.material';
+import { PlaylistEditorComponent } from './playlist-editor/playlist-editor.component';
 
 @NgModule({
 	imports: [
@@ -28,7 +29,8 @@ import { AppMaterialModule } from '../../app.material';
 		PlaylistComponent,
 		PlaylistListComponent,
 		PlaylistSearchComponent,
-		PlaylistDetailsComponent
+		PlaylistDetailsComponent,
+		PlaylistEditorComponent
 	],
 	providers: []
 })

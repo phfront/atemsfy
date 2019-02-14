@@ -20,22 +20,22 @@ import { SearchComponent } from './modules/search/search.component';
 import { PlaylistModule } from './modules/playlist/playlist.module';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		RedirectComponent,
-		HomeComponent,
-		LoginComponent,
-		SearchComponent
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		AppMaterialModule,
-		HttpClientModule,
-		FormsModule,
-		PlaylistModule
-	],
-	providers: [],
-	bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RedirectComponent,
+        HomeComponent,
+        LoginComponent,
+        SearchComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AppMaterialModule,
+        HttpClientModule,
+        FormsModule,
+        PlaylistModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

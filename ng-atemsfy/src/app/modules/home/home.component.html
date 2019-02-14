@@ -1,6 +1,8 @@
 <div class="home-mosaic">
 	<div class="mosaic">
-		<img *ngFor="let img of mosaic_images" [src]="img" >
+        <div [style.width]="getMosaicSize()" [style.height]="getMosaicSize()" *ngFor="let img of mosaic_images">
+            <img [src]="img" >
+        </div>
 	</div>
 </div>
 
