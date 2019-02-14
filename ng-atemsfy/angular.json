@@ -28,8 +28,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/button.scss",
-              "src/assets/scss/track.scss"
+              "src/assets/scss/atemsfy.scss"
             ],
             "scripts": []
           },

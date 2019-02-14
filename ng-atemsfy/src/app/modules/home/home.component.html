@@ -1,14 +1,17 @@
-<div class="home-mosaic">
+<div class="mosaic-scroll">
 	<div class="mosaic">
-        <div [style.width]="getMosaicSize()" [style.height]="getMosaicSize()" *ngFor="let img of mosaic_images">
+        <div *ngFor="let img of mosaic_images"
+            [style.width]="mosaicService.getMosaicSize()"
+            [style.height]="mosaicService.getMosaicSize()"
+        >
             <img [src]="img" >
         </div>
 	</div>
 </div>
 
-<div class="overlay-shadow"></div>
+<div class="mosaic-overlay-shadow"></div>
 
-<div class="home-content" *ngIf="currentUser !== undefined">
+<div class="mosaic-content home-content" *ngIf="currentUser !== undefined">
 	<!-- <img *ngFor="let image of currentUser.images" [src]="image.url">
 	<p><b style="text-transform: capitalize;">birthdate:</b> {{ currentUser.birthdate }}</p>
 	<p><b style="text-transform: capitalize;">country:</b> {{ currentUser.country }}</p>

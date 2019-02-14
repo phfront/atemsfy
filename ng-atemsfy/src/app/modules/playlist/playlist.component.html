@@ -1,11 +1,31 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+<div class="mosaic-scroll">
+    <div class="mosaic">
+        <div *ngFor="let img of mosaic_images"
+            [style.width]="mosaicService.getMosaicSize()"
+            [style.height]="mosaicService.getMosaicSize()"
+        >
+            <img [src]="img" >
+        </div>
+    </div>
+</div>
 
-	<mat-toolbar color="primary" class="example-toolbar">
-		<img matRipple class="logo" src="assets/images/logo.png" (click)="snav.toggle()">
-		<h1 class="example-app-name">Atemsfy playslist manager</h1>
-	</mat-toolbar>
+<div class="mosaic-overlay-shadow"></div>
 
-	<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+<div class="mosaic-content">
+    <div color="primary" class="atemsfy-toolbar">
+        <div class="atemsfy-toolbar-logo">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="atemsfy-toolbar-title">Atemsfy playslist manager</div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+
+
+<!-- <div class="example-container" [class.example-is-mobile]="mobileQuery.matches"> -->
+
+
+	<!-- <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 		
 		<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 			
@@ -19,9 +39,9 @@
 
 		</mat-sidenav-content>
 
-	</mat-sidenav-container>
+	</mat-sidenav-container> -->
 
-</div>
+<!-- </div> -->
 
 <!-- <div class="header">
 	

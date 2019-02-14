@@ -22,16 +22,6 @@
 					class="example-list"
                     (cdkDropListDropped)="drop($event)">
 					<div *ngFor="let item of available_tracks" cdkDrag>
-
-                        <!-- <div class="track">
-                            <img [src]="item.album.images[0].url" [alt]="item.name" />
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
-                            <div class="mat-h3 track-name">{{ item.name }}</div>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>close</mat-icon>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>chevron_right</mat-icon>
-						</div> -->
 						
 						<div class="track-in-list">
 							<img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
@@ -85,16 +75,6 @@
                     </div>
 
 					<div *ngFor="let item of playlistsTracksFilter()" cdkDrag>
-
-                        <!-- <div class="track">
-                            <img [src]="item.album.images[0].url" [alt]="item.name" />
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
-                            <div class="mat-h3 track-name">{{ item.name }}</div>
-                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>close</mat-icon>
-                            <mat-icon [class.disabled]="deleting_track" [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple (click)="removeTrackFromPlaylist(item)">delete</mat-icon>
-						</div> -->
 
 						<div class="track-in-list">
 							<img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
