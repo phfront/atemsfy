@@ -1,0 +1,106 @@
+// positions
+$atemsfy-messages-margin: 10px;
+$atemsfy-message-margin: 3px;
+$atemsfy-message-padding: 3px;
+
+// animation
+$animation-duration: 0.5s;
+
+// colors
+$success-background: green;
+$success-color: white;
+$info-background: blue;
+$info-color: white;
+$warning-background: yellow;
+$warning-color: black;
+$error-background: red;
+$error-color: white;
+
+.atemsfy-messages {
+    position: fixed;
+}
+
+.atemsfy-message {
+    margin: $atemsfy-message-margin;
+    padding: $atemsfy-message-padding;
+    animation: show $animation-duration;
+}
+
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes hide {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.atemsfy-message-success {
+    background: $success-background;
+    color: $success-color;
+}
+
+.atemsfy-message-info {
+    background: $info-background;
+    color: $info-color;
+}
+
+.atemsfy-message-warning {
+    background: $warning-background;
+    color: $warning-color;
+}
+
+.atemsfy-message-error {
+    background: $error-background;
+    color: $error-color;
+}
+
+.atemsfy-messages-top-left {
+    top: $atemsfy-messages-margin;
+    left: $atemsfy-messages-margin;
+}
+
+.atemsfy-messages-top-right {
+    top: $atemsfy-messages-margin;
+    right: $atemsfy-messages-margin;
+}
+
+.atemsfy-messages-bottom-left {
+    bottom: $atemsfy-messages-margin;
+    left: $atemsfy-messages-margin;
+}
+
+.atemsfy-messages-bottom-right {
+    bottom: $atemsfy-messages-margin;
+    right: $atemsfy-messages-margin;
+}
+
+.atemsfy-messages-bottom-right {
+    bottom: $atemsfy-messages-margin;
+    right: $atemsfy-messages-margin;
+}
+
+.atemsfy-messages-top-center {
+    top: $atemsfy-messages-margin;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.atemsfy-messages-bottom-center {
+    bottom: $atemsfy-messages-margin;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.atemsfy-messages-left-center {
+    left: $atemsfy-messages-margin;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.atemsfy-messages-right-center {
+    right: $atemsfy-messages-margin;
+    top: 50%;
+    transform: translateY(-50%);
+}

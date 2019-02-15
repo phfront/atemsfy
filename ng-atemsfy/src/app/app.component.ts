@@ -9,13 +9,23 @@ import { Router } from '@angular/router';
 export class AppComponent {
     title = 'ng-atemsfy';
     remaining_session_time;
+    messages_containers = [
+        'atemsfy-messages-top-left',
+        'atemsfy-messages-top-right',
+        'atemsfy-messages-bottom-left',
+        'atemsfy-messages-bottom-right',
+        'atemsfy-messages-top-center',
+        'atemsfy-messages-bottom-center',
+        'atemsfy-messages-left-center',
+        'atemsfy-messages-right-center'
+    ]
 
     constructor(
         public router: Router
     ) {
         setInterval(() => {
             this.updateRemainingSessionTime();
-        }, 1000)
+        }, 1000);
     }
 
     updateRemainingSessionTime() {

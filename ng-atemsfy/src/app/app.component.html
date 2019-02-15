@@ -2,5 +2,6 @@
 <!-- <div class="player" cdkDrag>
     Player
 </div> -->
+<div id="{{message_container_class}}" *ngFor="let message_container_class of messages_containers" class="atemsfy-messages {{ message_container_class }}"></div>
 <div class="beta">beta</div>
 <router-outlet></router-outlet>
