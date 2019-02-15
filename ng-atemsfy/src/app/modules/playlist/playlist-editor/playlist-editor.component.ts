@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../../../core/services/spotify/spotify.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+//services
+import { SpotifyService } from '../../../core/services/spotify/spotify.service';
+import { MessageService } from '../../../core/services/message/message.service';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -16,7 +19,8 @@ export class PlaylistEditorComponent implements OnInit {
         my: true,
         collaborative: true,
         public: true,
-        owner: 'by_me'
+        owner: 'by_me',
+        text: ''
     };
     playlist: any = undefined;
     available_tracks = [];
@@ -29,7 +33,6 @@ export class PlaylistEditorComponent implements OnInit {
         value: ''
     };
     deleting_track = false;
-
     // loadings
     loading = {
         playlist: false,
@@ -38,13 +41,15 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     constructor(
-        public spotifyService: SpotifyService
+        public spotifyService: SpotifyService,
+        public messageService: MessageService
     ) { }
 
     ngOnInit() {
         this.getMyPlaylists();
         this.initSearch();
     }
+
     getMyPlaylists(params = {}) {
         this.spotifyService.get('user_playlists', { user_id: sessionStorage.user_id }, params).subscribe(
             response => {
@@ -71,6 +76,9 @@ export class PlaylistEditorComponent implements OnInit {
                 return false;
             }
         }
+        if (this.playlists_filter.text !== '') {
+            return playlist.name.toLowerCase().indexOf(this.playlists_filter.text.toLowerCase()) > -1;
+        }
         return true;
     }
 
@@ -80,8 +88,8 @@ export class PlaylistEditorComponent implements OnInit {
         this.spotifyService.get('playlist', { playlist_id: playlist_id }).subscribe(
             response => {
                 this.playlist = response;
-                // this.playlists_tracks = this.playlist.tracks.items.map(item => item.track);
                 this.loading.playlist_tracks = true;
+                this.playlists_tracks = [];
                 this.getPlaylistTracks('playlists_tracks');
                 this.loading.playlist = false;
             },
@@ -148,6 +156,9 @@ export class PlaylistEditorComponent implements OnInit {
     drop(event: CdkDragDrop<string[]>) {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+            if (event.container.id === "cdk-drop-list-1") {
+                this.reorderPlaylistTracks(event.previousIndex, 1, event.currentIndex + 1);
+            }
         } else {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
             this.addTrackToPlaystist(this.playlists_tracks[event.currentIndex]);
@@ -157,10 +168,9 @@ export class PlaylistEditorComponent implements OnInit {
     addTrackToPlaystist(track) {
         this.spotifyService.post('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
             response => {
-                console.log(response);
+                this.messageService.success(`Música adicionada na playlist ${this.playlist.name}`);
             },
             error => {
-                console.log(error);
                 const index = this.playlists_tracks.indexOf(track);
                 this.playlists_tracks.splice(index, 1);
             }
@@ -173,16 +183,28 @@ export class PlaylistEditorComponent implements OnInit {
             this.spotifyService.delete('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
                 response => {
                     this.deleting_track = false;
-                    console.log(response);
                     const index = this.playlists_tracks.indexOf(track);
                     this.playlists_tracks.splice(index, 1);
+                    this.messageService.success(`Música removida da playlist ${this.playlist.name}`);
                 },
                 error => {
                     this.deleting_track = false;
-                    console.log(error);
                 }
             );
         }
+    }
+
+    reorderPlaylistTracks(range_start, range_length, insert_before) {
+        this.spotifyService.put('playlists_tracks', { playlist_id: this.playlist.id }, {
+            range_start: range_start,
+            range_length: range_length,
+            insert_before: insert_before
+        }).subscribe(
+            response => {
+                this.messageService.success(`A ordem das música da playlist ${this.playlist.name} foi alterada`);
+            },
+            error => {}
+        );
     }
 
 }

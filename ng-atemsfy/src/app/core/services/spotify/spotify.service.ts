@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { Observable, throwError, Subject } from 'rxjs';
-import { catchError, tap, debounceTime } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SpotifyService {
+
+    number_of_attempts = 5;
 
     constructor(
         public http: HttpClient,
@@ -55,6 +57,7 @@ export class SpotifyService {
         const url = this.url(endpoint, urlParams, getParams);
         const args = arguments;
         return this.http.get<any>(url, this.getHeader()).pipe(
+            retry(this.number_of_attempts),
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );
@@ -64,6 +67,7 @@ export class SpotifyService {
         const url = this.url(endpoint, urlParams);
         const args = arguments;
         return this.http.post<any>(url, object, this.getHeader()).pipe(
+            retry(this.number_of_attempts),
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );
@@ -73,6 +77,7 @@ export class SpotifyService {
         const url = this.url(endpoint, urlParams);
         const args = arguments;
         return this.http.patch<any>(url, object, this.getHeader()).pipe(
+            retry(this.number_of_attempts),
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );
@@ -82,6 +87,7 @@ export class SpotifyService {
         const url = this.url(endpoint, urlParams);
         const args = arguments;
         return this.http.put<any>(url, object, this.getHeader()).pipe(
+            retry(this.number_of_attempts),
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );
@@ -91,6 +97,7 @@ export class SpotifyService {
         const url = this.url(endpoint, urlParams);
         const args = arguments;
         return this.http.delete<any>(url, this.getHeader(object)).pipe(
+            retry(this.number_of_attempts),
             // tap(() => { this.preventTokenFromExpiring() }),
             catchError(this.handleError(endpoint))
         );

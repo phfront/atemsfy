@@ -30,3 +30,12 @@
 .atemsfy-playlist:hover img {
     transform: scale(1.2);
 }
+
+.atemsfy-playlist-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.atemsfy-playlist-info span:nth-child(2) {
+    font-size: 8px;
+}

@@ -1,7 +1,158 @@
-<div class="content">
-
+<div class="container">
     <div class="side-nav">
-        <div class="side-nav-list">
+        <div class="atemsfy-toggle atemsfy-toggle-horizontal">
+            <div class="atemsfy-toggle-item" style="text-decoration: line-through; opacity: 0.5;">Todas</div>
+            <div class="atemsfy-toggle-item atemsfy-toggle-item-active">Minhas</div>
+            <div class="atemsfy-toggle-item" style="text-decoration: line-through; opacity: 0.5;">Spotify</div>
+        </div>
+        <div class="div-search">
+            <input class="input-search" placeholder="Filtrar" [(ngModel)]="playlists_filter.text" />
+        </div>
+        <div class="side-nav-items">
+            <div *ngFor="let playlist of my_playlists">
+                <div *ngIf="filterPlaylist(playlist)" matRipple (click)="getPlaylist(playlist.id)">
+                    <div class="atemsfy-playlist-list">
+                        <div class="atemsfy-playlist">
+                            <img [src]="playlist.images[0].url" />
+                            <div class="atemsfy-playlist-info">
+                                <span>{{ playlist.name }}</span>
+                                <span>{{ playlist.owner.display_name }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div *ngIf="loading.playlist" class="loading-playlist">
+            <div class="atemsfy-loading">
+                <div class="atemsfy-loading-text">Carregando playlist</div>
+                <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
+            </div>
+        </div>
+        <div *ngIf="playlist" class="content-title">{{ playlist.name }}</div>
+        <div *ngIf="playlist" class="playlist-container">
+            <div class="search-content">
+                <div class="playlist-container-title">Músicas do Spotify</div>
+                <div class="div-search">
+                    <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()">
+                </div>
+                <div class="track-container">
+                    <div *ngIf="loading.search_tracks" class="loading-tracks">
+                        <div class="atemsfy-loading">
+                            <div class="atemsfy-loading-text">Buscando músicas</div>
+                            <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
+                        </div>
+                    </div>
+                    <div cdkDropList
+                        #available_tracks_list="cdkDropList"
+                        [cdkDropListData]="available_tracks"
+                        [cdkDropListConnectedTo]="[playlists_tracks_list]"
+                        class="example-list height-100-overflow"
+                        (cdkDropListDropped)="drop($event)">
+                        <div *ngFor="let item of available_tracks" cdkDrag>
+                            <div class="track-in-list">
+                                <img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
+                                <div class="track-in-list-info-player">
+                                    <div class="track-in-list-info">
+                                        <div class="track-in-list-info-name">{{ item.name }}</div>
+                                        <div class="track-in-list-info-time">Tempo: {{ item.duration_ms | date:'mm:ss' }}</div>
+                                    </div>
+                                    <div class="track-in-list-player">
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
+                                        </div>
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon>
+                                        </div>
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-card *cdkDragPreview>
+                                <mat-card-title>{{ item.name }}</mat-card-title>
+                                <img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="track-content">
+                <div class="playlist-container-title">Músicas da playlist</div>
+                <div class="div-search">
+                    <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="playlists_tracks_search.value">
+                </div>
+                <div class="track-container">
+                    <div *ngIf="loading.playlist_tracks" class="loading-tracks">
+                        <div class="atemsfy-loading">
+                            <div class="atemsfy-loading-text">Carregando músicas da playlist</div>
+                            <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
+                        </div>
+                    </div>
+                    <div cdkDropList
+                        #playlists_tracks_list="cdkDropList"
+                        [cdkDropListData]="playlists_tracks"
+                        [cdkDropListConnectedTo]="[]"
+                        class="example-list height-100-overflow"
+                        (cdkDropListDropped)="drop($event)">
+                        <div *ngIf="playlists_tracks.length === 0" class="no-item">
+                            Arraste as músicas aqui
+                        </div>
+                        <div *ngFor="let item of playlistsTracksFilter()" cdkDrag>
+                            <div class="track-in-list">
+                                <img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
+                                <div class="track-in-list-info-player">
+                                    <div class="track-in-list-info">
+                                        <div class="track-in-list-info-name">{{ item.name }}</div>
+                                        <div class="track-in-list-info-time">Tempo: {{ item.duration_ms | date:'mm:ss' }}</div>
+                                    </div>
+                                    <div class="track-in-list-player">
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>play_arrow</mat-icon>
+                                        </div>
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>pause</mat-icon>
+                                        </div>
+                                        <div class="track-in-list-player-icon">
+                                            <mat-icon [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple>stop</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="track-in-list-action">
+                                    <mat-icon class="track-in-list-action-remove" [class.disabled]="deleting_track" [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple (click)="removeTrackFromPlaylist(item)">delete</mat-icon>
+                                </div>
+                            </div>
+                            <img *cdkDragPreview class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="content height-100-overflow">
+    <div class="side-nav height-100-overflow">
+        <div class="side-nav-list height-100-overflow">
             <div class="filter">
                 <div class="atemsfy-toggle atemsfy-toggle-horizontal">
                     <div class="atemsfy-toggle-item">Todas</div>
@@ -20,44 +171,34 @@
                 </div>
             </div>
         </div>
-        <div class="side-nav-content">
-
+        <div class="side-nav-content height-100-overflow">
             <div *ngIf="loading.playlist" class="loading-playlist">
                 <div class="atemsfy-loading">
                     <div class="atemsfy-loading-text">Carregando playlist</div>
                     <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
                 </div>
             </div>
-
-            <div *ngIf="playlist">
-                
+            <div class="height-100-overflow" *ngIf="playlist">
                 <div class="playlist-name">{{ playlist.name }}</div>
-            
-                <div class="container-drag-drop">
-
-                    <div class="item-drag-drop">
-                        
+                <div class="container-drag-drop height-100-overflow">
+                    <div class="item-drag-drop height-100-overflow">
                         <h3>Músicas do Spotify</h3>
-
                         <div class="div-search">
                             <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()">
                         </div>
-
                         <div *ngIf="loading.search_tracks" class="loading-playlist">
                             <div class="atemsfy-loading">
                                 <div class="atemsfy-loading-text">Buscando músicas</div>
                                 <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
                             </div>
                         </div>
-            
                         <div cdkDropList
                             #available_tracks_list="cdkDropList"
                             [cdkDropListData]="available_tracks"
                             [cdkDropListConnectedTo]="[playlists_tracks_list]"
-                            class="example-list"
+                            class="example-list height-100-overflow"
                             (cdkDropListDropped)="drop($event)">
                             <div *ngFor="let item of available_tracks" cdkDrag>
-                                
                                 <div class="track-in-list">
                                     <img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
                                     <div class="track-in-list-info-player">
@@ -78,43 +219,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <mat-card *cdkDragPreview>
                                     <mat-card-title>{{ item.name }}</mat-card-title>
                                     <img class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
                                 </mat-card>
                             </div>
                         </div>
-                    
                     </div>
-            
-                    <div class="item-drag-drop">
+                    <div class="item-drag-drop height-100-overflow">
                         <h3>Músicas da Playlist</h3>
-
                         <div class="div-search">
                             <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="playlists_tracks_search.value">
                         </div>
-
                         <div *ngIf="loading.playlist_tracks" class="loading-playlist">
                             <div class="atemsfy-loading">
                                 <div class="atemsfy-loading-text">Carregando músicas da playlist</div>
                                 <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
                             </div>
                         </div>
-            
                         <div cdkDropList
                             #playlists_tracks_list="cdkDropList"
                             [cdkDropListData]="playlists_tracks"
                             [cdkDropListConnectedTo]="[]"
-                            class="example-list"
+                            class="example-list height-100-overflow"
                             (cdkDropListDropped)="drop($event)">
-                            
                             <div *ngIf="playlists_tracks.length === 0" class="no-item">
                                 Arraste as músicas aqui
                             </div>
-        
                             <div *ngFor="let item of playlistsTracksFilter()" cdkDrag>
-        
                                 <div class="track-in-list">
                                     <img class="track-in-list-image" [src]="item.album.images[0].url" [alt]="item.name" />
                                     <div class="track-in-list-info-player">
@@ -138,19 +270,13 @@
                                         <mat-icon class="track-in-list-action-remove" [class.disabled]="deleting_track" [matRippleCentered]="true" [matRippleUnbounded]="true" matRipple (click)="removeTrackFromPlaylist(item)">delete</mat-icon>
                                     </div>
                                 </div>
-                                
                                 <img *cdkDragPreview class="track-img-preview" [src]="item.album.images[0].url" [alt]="item.name">
-        
                             </div>
-                            
                         </div>
                     </div>
-            
                 </div>
-                
             </div>
-
         </div>
     </div>
-
 </div>
+-->
