@@ -156,7 +156,7 @@ export class PlaylistEditorComponent implements OnInit {
     drop(event: CdkDragDrop<string[]>) {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-            if (event.container.id === "cdk-drop-list-1") {
+            if (event.container.element.nativeElement.getAttribute('playlist-tracks') === 'true') {
                 this.reorderPlaylistTracks(event.previousIndex, 1, event.currentIndex + 1);
             }
         } else {
