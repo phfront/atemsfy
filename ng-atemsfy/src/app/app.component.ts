@@ -34,4 +34,15 @@ export class AppComponent {
         this.remaining_session_time = time.toFixed(0);
     }
 
+    logout() {
+        sessionStorage.access_token = undefined;
+        sessionStorage.expires_in = undefined;
+        sessionStorage.session_time = undefined;
+        sessionStorage.state = undefined;
+        sessionStorage.token_type = undefined;
+        sessionStorage.user_id = undefined;
+        window['player'].disconnect();
+        this.router.navigate(['/login']);
+    }
+
 }

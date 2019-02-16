@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MessageService } from '../message/message.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,8 @@ export class SpotifyService {
 
     constructor(
         public http: HttpClient,
-        public router: Router
+        public router: Router,
+        public messageService: MessageService
     ) { }
 
     getHeader(body = {}) {
@@ -63,8 +65,8 @@ export class SpotifyService {
         );
     }
 
-    post(endpoint, urlParams, object) {
-        const url = this.url(endpoint, urlParams);
+    post(endpoint, urlParams, object, getParams = {}) {
+        const url = this.url(endpoint, urlParams, getParams);
         const args = arguments;
         return this.http.post<any>(url, object, this.getHeader()).pipe(
             retry(this.number_of_attempts),
@@ -73,8 +75,8 @@ export class SpotifyService {
         );
     }
 
-    patch(endpoint, urlParams, object) {
-        const url = this.url(endpoint, urlParams);
+    patch(endpoint, urlParams, object, getParams = {}) {
+        const url = this.url(endpoint, urlParams, getParams);
         const args = arguments;
         return this.http.patch<any>(url, object, this.getHeader()).pipe(
             retry(this.number_of_attempts),
@@ -83,8 +85,8 @@ export class SpotifyService {
         );
     }
 
-    put(endpoint, urlParams, object) {
-        const url = this.url(endpoint, urlParams);
+    put(endpoint, urlParams, object, getParams = {}) {
+        const url = this.url(endpoint, urlParams, getParams);
         const args = arguments;
         return this.http.put<any>(url, object, this.getHeader()).pipe(
             retry(this.number_of_attempts),
@@ -93,8 +95,8 @@ export class SpotifyService {
         );
     }
 
-    delete(endpoint, urlParams, object) {
-        const url = this.url(endpoint, urlParams);
+    delete(endpoint, urlParams, object, getParams = {}) {
+        const url = this.url(endpoint, urlParams, getParams);
         const args = arguments;
         return this.http.delete<any>(url, this.getHeader(object)).pipe(
             retry(this.number_of_attempts),
@@ -108,7 +110,11 @@ export class SpotifyService {
             console.log(error);
             try {
                 if (error.error.error.status === 401) { // access token expired
-                    alert('Sessão expirada, por favor faça login novamente!');
+                    this.messageService.error('Sessão expirada, por favor faça login novamente!', { position: 'top-center' });
+                    this.router.navigate(['/']);
+                }
+                if (error.error.error.message === "Only valid bearer authentication supported") {
+                    this.messageService.error('Informações de sessão inválida, por favor faça login novamente!', { position: 'top-center' });
                     this.router.navigate(['/']);
                 }
             }

@@ -16,6 +16,7 @@
 .track-in-list-image {
     width: 60px;
     height: 60px;
+    background-size: cover;
 }
 
 .track-in-list-info-player {
@@ -23,6 +24,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 
 .track-in-list-action {
@@ -73,4 +75,30 @@
 
 .track-in-list-player-icon:hover {
     cursor: pointer;
+}
+
+.track-in-list-play-button {
+    border-radius: 100%;
+    border: 0px solid;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 1px 21px rgb(34, 34, 34);
+    background: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.track-in-list-play-button:hover {
+    opacity: 1;
+}
+
+.track-in-list-play-button:active {
+    transform: scale(1.1);
+}
+
+.track-in-list-play-button:active, .track-in-list-play-button:focus {
+    outline: 0;
 }

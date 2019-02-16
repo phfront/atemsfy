@@ -1,5 +1,9 @@
+$atemsfy-button-padding-top-bottom: 10px;
+$atemsfy-button-padding-left-right: 20px;
+$atemsfy-button-player-padding: 5px;
+
 .atemsfy-button {
-    padding: 10px 20px;
+    padding: $atemsfy-button-padding-top-bottom $atemsfy-button-padding-left-right;
     border-radius: 100px;
     position: relative;
     top: 0;
@@ -16,7 +20,6 @@
 .atemsfy-button:active {
     box-shadow: none;
     top: 6px;
-    margin-bottom: 0;
 }
 
 .atemsfy-button:active, .atemsfy-button:focus {
@@ -51,6 +54,36 @@
     border: 0px;
     color: white;
     box-shadow: 0px 6px 0px #434343;
+}
+
+.atemsfy-button-alternative {
+    background: linear-gradient(
+        to bottom,
+        #23aaf3 0%,
+        #1ea2e9 17%,
+        #1294da 33%,
+        #0f7eb9 67%,
+        #0c6291 83%,
+        #0b557c 100%
+    );
+    border: 0px;
+    color: white;
+    box-shadow: 0px 6px 0px #083f5c;
+}
+
+.atemsfy-button-white {
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #fdfdfd 17%,
+        #fbfbfb 33%,
+        #f9f9f9 67%,
+        #f7f7f7 83%,
+        #f5f5f5 100%
+    );
+    border: 0px;
+    color: #1db954;
+    box-shadow: 0px 6px 0px #c7c7c7;
 }
 
 .atemsfy-button-warning {

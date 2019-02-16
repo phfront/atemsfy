@@ -1,39 +1,80 @@
 // positions
 $atemsfy-messages-margin: 10px;
 $atemsfy-message-margin: 3px;
-$atemsfy-message-padding: 3px;
+$atemsfy-message-padding: 10px;
+$atemsfy-message-width: 300px;
+$atemsfy-message-height-vertical: 100px;
+$border-radius: 20px;
+
+// font
+$atemsfy-message-title-size: 15px;
+$atemsfy-message-text-size: 13px;
 
 // animation
 $animation-duration: 0.5s;
 
 // colors
-$success-background: green;
-$success-color: white;
-$info-background: blue;
-$info-color: white;
-$warning-background: yellow;
-$warning-color: black;
-$error-background: red;
-$error-color: white;
+$success-background: #1db954;
+$success-color: #ffffff;
+$success-background-bar-hide: #0f692f;
+$info-background: #1da7b9;
+$info-color: #ffffff;
+$info-background-bar-hide: #0f5069;
+$warning-background: #f5c950;
+$warning-color: #000000;
+$warning-background-bar-hide: #a3800c;
+$error-background: #e22d2d;
+$error-color: #ffffff;
+$error-background-bar-hide: #901212;
 
 .atemsfy-messages {
     position: fixed;
+    display: flex;
+    z-index: 2;
 }
 
 .atemsfy-message {
-    margin: $atemsfy-message-margin;
-    padding: $atemsfy-message-padding;
-    animation: show $animation-duration;
+    animation: atemsfy-message-animation-bar-show $animation-duration;
+    display: flex;
+    cursor: pointer;
 }
 
-@keyframes show {
+.atemsfy-message-content {
+    padding: $atemsfy-message-padding;
+    flex-grow: 1;
+}
+
+.atemsfy-message-title {
+    font-size: $atemsfy-message-title-size;
+}
+
+.atemsfy-message-text {
+    font-size: $atemsfy-message-text-size;
+}
+
+.atemsfy-message-bar-hide {
+    width: 100%;
+    height: 10px;
+}
+
+.atemsfy-message-bar-hide-vertical {
+    width: 10px;
+    height: 100%;
+}
+
+@keyframes atemsfy-message-animation-bar-show {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes hide {
-    from { opacity: 1; }
-    to { opacity: 0; }
+@keyframes atemsfy-message-animation-bar-hide {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+@keyframes atemsfy-message-animation-bar-hide-vertical {
+    from { height: 100%; }
+    to { height: 0%; }
 }
 
 .atemsfy-message-success {
@@ -56,51 +97,172 @@ $error-color: white;
     color: $error-color;
 }
 
+.atemsfy-message-success .atemsfy-message-bar-hide, .atemsfy-message-success .atemsfy-message-bar-hide-vertical {
+    background: $success-background-bar-hide;
+}
+
+.atemsfy-message-info .atemsfy-message-bar-hide, .atemsfy-message-info .atemsfy-message-bar-hide-vertical {
+    background: $info-background-bar-hide;
+}
+
+.atemsfy-message-warning .atemsfy-message-bar-hide, .atemsfy-message-warning .atemsfy-message-bar-hide-vertical {
+    background: $warning-background-bar-hide;
+}
+
+.atemsfy-message-error .atemsfy-message-bar-hide, .atemsfy-message-error .atemsfy-message-bar-hide-vertical {
+    background: $error-background-bar-hide;
+}
+
 .atemsfy-messages-top-left {
     top: $atemsfy-messages-margin;
     left: $atemsfy-messages-margin;
+    flex-direction: column;
 }
 
 .atemsfy-messages-top-right {
     top: $atemsfy-messages-margin;
     right: $atemsfy-messages-margin;
+    flex-direction: column;
 }
 
 .atemsfy-messages-bottom-left {
     bottom: $atemsfy-messages-margin;
     left: $atemsfy-messages-margin;
+    flex-direction: column-reverse;
 }
 
 .atemsfy-messages-bottom-right {
     bottom: $atemsfy-messages-margin;
     right: $atemsfy-messages-margin;
-}
-
-.atemsfy-messages-bottom-right {
-    bottom: $atemsfy-messages-margin;
-    right: $atemsfy-messages-margin;
+    flex-direction: column-reverse;
 }
 
 .atemsfy-messages-top-center {
     top: $atemsfy-messages-margin;
     left: 50%;
     transform: translateX(-50%);
+    flex-direction: column;
 }
 
 .atemsfy-messages-bottom-center {
     bottom: $atemsfy-messages-margin;
     left: 50%;
     transform: translateX(-50%);
+    flex-direction: column-reverse;
 }
 
 .atemsfy-messages-left-center {
     left: $atemsfy-messages-margin;
     top: 50%;
     transform: translateY(-50%);
+    flex-direction: column;
 }
 
 .atemsfy-messages-right-center {
     right: $atemsfy-messages-margin;
     top: 50%;
     transform: translateY(-50%);
+    flex-direction: column;
+}
+
+.atemsfy-messages-top-left .atemsfy-message {
+    flex-direction: column-reverse;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-top-right .atemsfy-message {
+    flex-direction: column-reverse;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-bottom-left .atemsfy-message {
+    flex-direction: column;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-bottom-right .atemsfy-message {
+    flex-direction: column;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-top-center .atemsfy-message {
+    flex-direction: column-reverse;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-bottom-center .atemsfy-message {
+    flex-direction: column;
+    width: $atemsfy-message-width;
+    min-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-width;
+}
+
+.atemsfy-messages-left-center .atemsfy-message {
+    flex-direction: row-reverse;
+    height: $atemsfy-message-height-vertical;
+    min-height: $atemsfy-message-height-vertical;
+    max-height: $atemsfy-message-height-vertical;
+}
+
+.atemsfy-messages-right-center .atemsfy-message {
+    flex-direction: row;
+    height: $atemsfy-message-height-vertical;
+    min-height: $atemsfy-message-height-vertical;
+    max-height: $atemsfy-message-height-vertical;
+}
+
+.atemsfy-messages-top-left .atemsfy-message:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.atemsfy-messages-top-right .atemsfy-message:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.atemsfy-messages-bottom-left .atemsfy-message:last-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+.atemsfy-messages-bottom-right .atemsfy-message:last-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+.atemsfy-messages-top-center .atemsfy-message:last-child {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+
+.atemsfy-messages-bottom-center .atemsfy-message:last-child {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+}
+
+.atemsfy-messages-left-center .atemsfy-message:first-child {
+    border-top-right-radius: $border-radius;
+}
+
+.atemsfy-messages-left-center .atemsfy-message:last-child {
+    border-bottom-right-radius: $border-radius;
+}
+
+.atemsfy-messages-right-center .atemsfy-message:first-child {
+    border-top-left-radius: $border-radius;
+}
+
+.atemsfy-messages-right-center .atemsfy-message:last-child {
+    border-bottom-left-radius: $border-radius;
 }

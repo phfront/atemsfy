@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { PlaylistComponent } from './playlist.component';
 import { PlaylistSearchComponent } from './playlist-search/playlist-search.component';
 import { PlaylistEditorComponent } from './playlist-editor/playlist-editor.component';
+import { PlayerComponent } from './player/player.component';
 
 // route
 import { PlaylistRoutingModule } from './playlist-routing.module';
@@ -26,9 +27,12 @@ import { AppMaterialModule } from '../../app.material';
 	declarations: [
 		PlaylistComponent,
 		PlaylistSearchComponent,
-		PlaylistEditorComponent
+		PlaylistEditorComponent,
+		PlayerComponent
 	],
-	providers: []
+	providers: [
+		PlayerComponent
+	]
 })
 export class PlaylistModule {
 

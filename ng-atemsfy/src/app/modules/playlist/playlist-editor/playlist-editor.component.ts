@@ -6,6 +6,7 @@ import { debounceTime } from 'rxjs/operators';
 //services
 import { SpotifyService } from '../../../core/services/spotify/spotify.service';
 import { MessageService } from '../../../core/services/message/message.service';
+import { PlayerComponent } from '../player/player.component';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -33,16 +34,17 @@ export class PlaylistEditorComponent implements OnInit {
         value: ''
     };
     deleting_track = false;
-    // loadings
     loading = {
         playlist: false,
         playlist_tracks: false,
         search_tracks: false
     }
+    message_position = 'bottom-left';
 
     constructor(
         public spotifyService: SpotifyService,
-        public messageService: MessageService
+        public messageService: MessageService,
+        public playerComponent: PlayerComponent
     ) { }
 
     ngOnInit() {
@@ -58,9 +60,7 @@ export class PlaylistEditorComponent implements OnInit {
                     this.getMyPlaylists(this.spotifyService.querystringToJson(response['next']));
                 }
             },
-            error => {
-                console.log(error);
-            }
+            error => { }
         );
     }
 
@@ -161,14 +161,15 @@ export class PlaylistEditorComponent implements OnInit {
             }
         } else {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-            this.addTrackToPlaystist(this.playlists_tracks[event.currentIndex]);
+            this.addTrackToPlaystist(this.playlists_tracks[event.currentIndex], event.currentIndex);
+            this.available_tracks.splice(event.previousIndex, 0, this.playlists_tracks[event.currentIndex]);
         }
     }
 
-    addTrackToPlaystist(track) {
-        this.spotifyService.post('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri] }).subscribe(
+    addTrackToPlaystist(track, position) {
+        this.spotifyService.post('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri], position: position }).subscribe(
             response => {
-                this.messageService.success(`Música adicionada na playlist ${this.playlist.name}`);
+                this.messageService.success(`Música ${track.name} adicionada na playlist ${this.playlist.name}`, { position: this.message_position });
             },
             error => {
                 const index = this.playlists_tracks.indexOf(track);
@@ -185,7 +186,7 @@ export class PlaylistEditorComponent implements OnInit {
                     this.deleting_track = false;
                     const index = this.playlists_tracks.indexOf(track);
                     this.playlists_tracks.splice(index, 1);
-                    this.messageService.success(`Música removida da playlist ${this.playlist.name}`);
+                    this.messageService.success(`Música ${track.name} removida da playlist ${this.playlist.name}`, { position: this.message_position });
                 },
                 error => {
                     this.deleting_track = false;
@@ -201,10 +202,37 @@ export class PlaylistEditorComponent implements OnInit {
             insert_before: insert_before
         }).subscribe(
             response => {
-                this.messageService.success(`A ordem das música da playlist ${this.playlist.name} foi alterada`);
+                this.messageService.success(`A ordem das música da playlist ${this.playlist.name} foi alterada`, { position: this.message_position });
             },
             error => {}
         );
+    }
+
+    askNewPlaylistName() {
+        setTimeout(() => {
+            this.addNewPlaylist(prompt('Informe o nome da nova playlist'));
+        }, 100);
+    }
+
+    addNewPlaylist(playlist_name) {
+        if (playlist_name !== null && playlist_name !== "") {
+            this.spotifyService.post('user_playlists', { user_id: sessionStorage.user_id }, { name: playlist_name }).subscribe(
+                response => {
+                    this.messageService.success(`Playlist ${playlist_name} foi adicionada`, { position: this.message_position });
+                    this.my_playlists = [];
+                    this.getMyPlaylists();
+                },
+                error => {}
+            );
+        }
+    }
+
+    playSearchTrack(track) {
+        this.playerComponent.playTrack(track.uri);
+    }
+    
+    playPlaylistTrack(track, i) {
+        this.playerComponent.playContext(this.playlist.uri, { position: i });
     }
 
 }

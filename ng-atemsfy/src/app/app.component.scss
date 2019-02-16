@@ -39,3 +39,10 @@
     transform: rotate(-40deg);
     z-index: 1;
 }
+
+.div-exit {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1;
+}

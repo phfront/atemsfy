@@ -1,15 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>NgAtemsfy</title>
-  <base href="/">
+    <meta charset="utf-8">
+    <title>NgAtemsfy</title>
+    <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        window['start_player'] = function() {
+            return new Promise((resolve, reject) => {
+                window['player'] = new Spotify.Player({
+                    name: 'atemsfy-player',
+                    getOAuthToken: cb => { cb(sessionStorage.access_token); }
+                });
+        
+                // Error handling
+                window['player'].addListener('initialization_error', ({ message }) => { console.error(message); });
+                window['player'].addListener('authentication_error', ({ message }) => { console.error(message); });
+                window['player'].addListener('account_error', ({ message }) => { console.error(message); });
+                window['player'].addListener('playback_error', ({ message }) => { console.error(message); });
+        
+                // Ready
+                window['player'].addListener('ready', ({ device_id }) => {
+                    window['player_device_id'] = device_id;
+                    console.log('Ready with Device ID', device_id);
+                });
+        
+                // Not Ready
+                window['player'].addListener('not_ready', ({ device_id }) => {
+                    console.log('Device ID has gone offline', device_id);
+                });
+        
+                // Connect to the player!
+                window['player'].connect().then(() => {
+                    resolve();
+                });
+            })
+        }
+    };
+    </script>
 </head>
 <body class="mat-app-background">
-  <app-root></app-root>
+    <app-root></app-root>
 </body>
 </html>

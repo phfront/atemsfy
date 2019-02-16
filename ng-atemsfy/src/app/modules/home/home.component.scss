@@ -1,10 +1,58 @@
 .button-size {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 20px;
+}
+
+.mosaic-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home-content {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.home-welcome {
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.home-content-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px solid #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.user-info-image {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 50px;
+}
+
+.user-info-line {
+    margin: 0px;
+}
+
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-button {
+    margin-bottom: 20px;
+}
+
+.home-button:last-child {
+    margin-bottom: 0px;
 }

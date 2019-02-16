@@ -11,22 +11,33 @@
 
 <div class="mosaic-overlay-shadow"></div>
 
-<div class="mosaic-content home-content" *ngIf="currentUser !== undefined">
-	<!-- <img *ngFor="let image of currentUser.images" [src]="image.url">
-	<p><b style="text-transform: capitalize;">birthdate:</b> {{ currentUser.birthdate }}</p>
-	<p><b style="text-transform: capitalize;">country:</b> {{ currentUser.country }}</p>
-	<p><b style="text-transform: capitalize;">display_name:</b> {{ currentUser.display_name }}</p>
-	<p><b style="text-transform: capitalize;">email:</b> {{ currentUser.email }}</p>
-	<p><b style="text-transform: capitalize;">external_urls:</b> {{ currentUser.external_urls }}</p>
-	<p><b style="text-transform: capitalize;">followers:</b> {{ currentUser.followers.href }} / {{ currentUser.followers.total }}</p>
-	<p><b style="text-transform: capitalize;">href:</b> {{ currentUser.href }}</p>
-	<p><b style="text-transform: capitalize;">id:</b> {{ currentUser.id }}</p>
-	<p><b style="text-transform: capitalize;">product:</b> {{ currentUser.product }}</p>
-	<p><b style="text-transform: capitalize;">type:</b> {{ currentUser.type }}</p>
-	<p><b style="text-transform: capitalize;">uri:</b> {{ currentUser.uri }}</p>
-
-	<br> -->
-	<button class="atemsfy-button atemsfy-button-primary" routerLink="/playlist/editor">
-		<span class="button-size">Editar minhas playlists</span>
-	</button>
+<div class="mosaic-content" *ngIf="currentUser !== undefined">
+	<div class="home-content">
+		<div class="home-welcome">
+			Olá {{ currentUser.display_name }}!
+		</div>
+		<div class="home-content-info">
+			<div class="user-info">
+				<img class="user-info-image" *ngIf="currentUser.images.length > 0" [src]="currentUser.images[0].url">
+				<p class="user-info-line">Nascimento: {{ currentUser.birthdate | date:'dd/MM/yyyy' }}</p>
+				<p class="user-info-line">País: {{ currentUser.country }}</p>
+				<p class="user-info-line">Nome: {{ currentUser.display_name }}</p>
+				<p class="user-info-line">Email: {{ currentUser.email }}</p>
+				<p class="user-info-line">Seguidores: {{ currentUser.followers.total }}</p>
+				<p class="user-info-line">Conta: {{ currentUser.product }}</p>
+			</div>
+			<div class="home-buttons">
+				<button class="home-button atemsfy-button atemsfy-button-primary" routerLink="/search">
+					<span class="button-size">Pesquisar</span>
+				</button>
+				<button class="home-button atemsfy-button atemsfy-button-primary" routerLink="/playlist/editor">
+					<span class="button-size">Editar minhas playlists</span>
+				</button>
+				<button class="home-button atemsfy-button atemsfy-button-primary">
+					<span class="button-size">Minhas músicas salvas</span>
+					<div>Em breve</div>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>

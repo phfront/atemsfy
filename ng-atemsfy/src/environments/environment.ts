@@ -7,6 +7,7 @@ export const environment = {
     client_id: '9ad7c246e42047f0ba8a78be143c0820',
     client_secret: '7f7890e43ea249a0ab401fdac8ba3b05',
     redirect_uri: 'http://localhost:4200/redirect',
+    // redirect_uri: 'https://6807d03d.ngrok.io/redirect',
     response_type: 'token',
     state: 'lorem',
     scope: '\
@@ -38,6 +39,9 @@ export const environment = {
         search: () => `https://api.spotify.com/v1/search`,
         playlists_tracks: (params) => `https://api.spotify.com/v1/playlists/${params.playlist_id}/tracks`,
         user_top: (params) => `https://api.spotify.com/v1/me/top/${params.type}`,
+        user_current_payback: () => `https://api.spotify.com/v1/me/player/currently-playing`,
+        available_devices: () => `https://api.spotify.com/v1/me/player/devices`,
+        user_playback: () => `https://api.spotify.com/v1/me/player/play`,
     }
 };
 

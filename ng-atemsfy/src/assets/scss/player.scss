@@ -1,0 +1,132 @@
+// color
+$player-background: #212121;
+$player-button-background: #b3b3b3;
+$player-time-bar-track-background: #b3b3b3;
+$player-time-bar-background: #1db954;
+
+// sizes
+$player-width: 250px;
+$player-height: 60px;
+$player-top-height: $player-height * 0.6;
+$player-bottom-height: $player-height * 0.4 - 2px;
+$player-button-size: $player-bottom-height - 3px;
+$player-button-font-size: $player-button-size - 11px;
+
+.player {
+    display: flex;
+    background: $player-background;
+    width: $player-width;
+}
+
+.player-image {
+    width: $player-height;
+    height: $player-height;
+}
+
+.player-image img {
+    width: $player-height;
+    height: $player-height;
+}
+
+.player-title-controls {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-title {
+    height: $player-top-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-controls {
+    height: $player-bottom-height;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.player-controls-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.player-controls-button {
+    border-radius: 100%;
+    border: 0px solid;
+    padding: $atemsfy-button-player-padding;
+    width: $player-button-size;
+    height: $player-button-size;
+    font-size: $player-button-font-size;
+    background: $player-button-background;
+    cursor: pointer;
+}
+
+.player-controls-button:hover {
+    transform: scale(1.1);
+}
+
+.player-controls-button:active {
+    transform: scale(0.9);
+}
+
+.player-controls-button:active, .player-controls-button:focus {
+    outline: 0;
+}
+
+.player-controls-volume {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: $player-bottom-height;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.player-controls-volume-slider {
+    -webkit-appearance: none;
+    width: 90%;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+.player-controls-volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1)
+}
+
+.player-controls-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    margin: -5px;
+    border-radius: 100%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.player-controls-volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    margin: -5px;
+    border-radius: 100%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.player-controls-time-bar-track {
+    width: 100%;
+    height: 2px;
+    background: $player-time-bar-track-background;
+}
+
+.player-controls-time-bar {
+    height: 2px;
+    background: $player-time-bar-background;
+}
