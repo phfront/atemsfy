@@ -6,8 +6,8 @@ export const environment = {
     production: false,
     client_id: '9ad7c246e42047f0ba8a78be143c0820',
     client_secret: '7f7890e43ea249a0ab401fdac8ba3b05',
-    redirect_uri: 'http://localhost:4200/redirect',
-    // redirect_uri: 'https://6807d03d.ngrok.io/redirect',
+    // redirect_uri: 'http://localhost:4200/redirect',
+    redirect_uri: 'https://atemsfy.herokuapp.com/redirect',
     response_type: 'token',
     state: 'lorem',
     scope: '\
