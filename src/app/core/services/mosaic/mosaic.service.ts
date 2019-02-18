@@ -26,7 +26,7 @@ export class MosaicService {
                     resolve(error);
                 }
             );
-        })
+        });
     }
 
     shuffle(array: Array<any>) {
