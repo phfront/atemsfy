@@ -15,7 +15,7 @@ export class AuthService {
         let url = environment.urls.access_token();
         url += `?client_id=${environment.client_id}`;
         url += `&response_type=${environment.response_type}`;
-        url += `&redirect_uri=${environment.redirect_uri}`;
+        url += `&redirect_uri=${location.origin + environment.redirect_uri}`;
         url += `&state=${environment.state}`;
         url += `&scope=${environment.scope}`;
         window.location.replace(url);
