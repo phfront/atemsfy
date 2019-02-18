@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { PlayerComponent } from './modules/player/player.component';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,14 +19,33 @@ export class AppComponent {
         'atemsfy-messages-bottom-center',
         'atemsfy-messages-left-center',
         'atemsfy-messages-right-center'
-    ]
+    ];
+    @ViewChild('player') player_element;
+    player_show = true;
 
     constructor(
-        public router: Router
+        public router: Router,
+        public playerComponent: PlayerComponent
     ) {
         setInterval(() => {
             this.updateRemainingSessionTime();
         }, 1000);
+        const player_element_init = setInterval(() => {
+            if (this.player_element !== undefined) {
+                this.player_element.nativeElement.style.transform = localStorage.player_element_position;
+                clearInterval(player_element_init);
+            }
+        }, 1);
+        this.startPlayer();
+    }
+
+    startPlayer() {
+        const start_player_interval = setInterval(() => {
+            if (window['start_player'] !== undefined) {
+                clearInterval(start_player_interval);
+                this.playerComponent.startPlayer();
+            }
+        }, 1);
     }
 
     updateRemainingSessionTime() {
@@ -43,6 +63,14 @@ export class AppComponent {
         sessionStorage.user_id = undefined;
         window['player'].disconnect();
         this.router.navigate(['/login']);
+    }
+
+    public togglePlayer(flag) {
+        this.player_show = flag;
+    }
+
+    playerDragEnd() {
+        localStorage.player_element_position = this.player_element.nativeElement.style.transform;
     }
 
 }

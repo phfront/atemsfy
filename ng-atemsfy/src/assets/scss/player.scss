@@ -1,26 +1,56 @@
 // color
-$player-background: #212121;
-$player-button-background: #b3b3b3;
-$player-time-bar-track-background: #b3b3b3;
-$player-time-bar-background: #1db954;
+$player-background: #1db954;
+$player-icon-color: #ffffff;
+$player-time-bar-track-background: #ffffff;
+$player-time-bar-background: #0b7932;
+$player-image-background: #1db954;
+$player-volume-track-color: #ffffff;
+$player-volume-color: #0b7932;
+
 
 // sizes
 $player-width: 250px;
 $player-height: 60px;
 $player-top-height: $player-height * 0.6;
-$player-bottom-height: $player-height * 0.4 - 2px;
-$player-button-size: $player-bottom-height - 3px;
-$player-button-font-size: $player-button-size - 11px;
+$player-progress-bar-height: 5px;
+$player-bottom-height: $player-height * 0.4 - $player-progress-bar-height;
+$player-icon-font-size: 17px;
+$player-border-radius: 0px;
+
+.player-initializing {
+    width: $player-width;
+    height: $player-height + $player-progress-bar-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $player-background;
+    margin-top: ($player-height + $player-progress-bar-height) * -1;
+    position: absolute;
+    border-bottom-left-radius: $player-border-radius;
+    border-bottom-right-radius: $player-border-radius;
+}
+
+.player-initializing-message {
+    margin: 0px 10px;
+}
 
 .player {
     display: flex;
+    flex-wrap: wrap;
     background: $player-background;
     width: $player-width;
+    border-bottom-left-radius: $player-border-radius;
+    border-bottom-right-radius: $player-border-radius;
+}
+
+.player-info {
+    display: flex;
 }
 
 .player-image {
     width: $player-height;
     height: $player-height;
+    background: $player-image-background;
 }
 
 .player-image img {
@@ -47,32 +77,27 @@ $player-button-font-size: $player-button-size - 11px;
     flex-wrap: wrap;
 }
 
-.player-controls-buttons {
+.player-controls-icons {
     width: 50%;
     display: flex;
     justify-content: space-around;
 }
 
-.player-controls-button {
-    border-radius: 100%;
-    border: 0px solid;
-    padding: $atemsfy-button-player-padding;
-    width: $player-button-size;
-    height: $player-button-size;
-    font-size: $player-button-font-size;
-    background: $player-button-background;
+.player-controls-icon {
+    font-size: $player-icon-font-size;
+    color:$player-icon-color;
     cursor: pointer;
 }
 
-.player-controls-button:hover {
+.player-controls-icon:hover {
     transform: scale(1.1);
 }
 
-.player-controls-button:active {
+.player-controls-icon:active {
     transform: scale(0.9);
 }
 
-.player-controls-button:active, .player-controls-button:focus {
+.player-controls-icon:active, .player-controls-icon:focus {
     outline: 0;
 }
 
@@ -93,6 +118,7 @@ $player-button-font-size: $player-button-size - 11px;
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    background: $player-volume-track-color;
     cursor: pointer;
 }
 
@@ -107,7 +133,7 @@ $player-button-font-size: $player-button-size - 11px;
     height: 15px;
     margin: -5px;
     border-radius: 100%;
-    background: #4CAF50;
+    background: $player-volume-color;
     cursor: pointer;
 }
 
@@ -116,17 +142,17 @@ $player-button-font-size: $player-button-size - 11px;
     height: 15px;
     margin: -5px;
     border-radius: 100%;
-    background: #4CAF50;
+    background: $player-volume-color;
     cursor: pointer;
 }
 
 .player-controls-time-bar-track {
     width: 100%;
-    height: 2px;
+    height: $player-progress-bar-height;
     background: $player-time-bar-track-background;
 }
 
 .player-controls-time-bar {
-    height: 2px;
+    height: $player-progress-bar-height;
     background: $player-time-bar-background;
 }

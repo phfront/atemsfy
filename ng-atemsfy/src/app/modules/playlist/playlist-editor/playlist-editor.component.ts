@@ -1,12 +1,12 @@
+import { AppComponent } from './../../../app.component';
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-//services
+// services
 import { SpotifyService } from '../../../core/services/spotify/spotify.service';
 import { MessageService } from '../../../core/services/message/message.service';
-import { PlayerComponent } from '../player/player.component';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -38,13 +38,13 @@ export class PlaylistEditorComponent implements OnInit {
         playlist: false,
         playlist_tracks: false,
         search_tracks: false
-    }
+    };
     message_position = 'bottom-left';
 
     constructor(
         public spotifyService: SpotifyService,
         public messageService: MessageService,
-        public playerComponent: PlayerComponent
+        public myapp: AppComponent
     ) { }
 
     ngOnInit() {
@@ -157,7 +157,14 @@ export class PlaylistEditorComponent implements OnInit {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
             if (event.container.element.nativeElement.getAttribute('playlist-tracks') === 'true') {
-                this.reorderPlaylistTracks(event.previousIndex, 1, event.currentIndex + 1);
+                if (event.previousIndex !== event.currentIndex) {
+                    if (event.previousIndex < event.currentIndex) {
+                        this.reorderPlaylistTracks(event.previousIndex, 1, event.currentIndex + 1);
+                    } else {
+                        this.reorderPlaylistTracks(event.previousIndex, 1, event.currentIndex);
+                    }
+
+                }
             }
         } else {
             transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
@@ -167,9 +174,16 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     addTrackToPlaystist(track, position) {
-        this.spotifyService.post('playlists_tracks', { playlist_id: this.playlist.id }, { uris: [track.uri], position: position }).subscribe(
+        this.spotifyService.post('playlists_tracks', {
+            playlist_id: this.playlist.id
+        }, {
+            uris: [track.uri],
+            position: position
+        }).subscribe(
             response => {
-                this.messageService.success(`Música ${track.name} adicionada na playlist ${this.playlist.name}`, { position: this.message_position });
+                this.messageService.success(`Música ${track.name} adicionada na playlist ${this.playlist.name}`, {
+                    position: this.message_position
+                });
             },
             error => {
                 const index = this.playlists_tracks.indexOf(track);
@@ -186,7 +200,9 @@ export class PlaylistEditorComponent implements OnInit {
                     this.deleting_track = false;
                     const index = this.playlists_tracks.indexOf(track);
                     this.playlists_tracks.splice(index, 1);
-                    this.messageService.success(`Música ${track.name} removida da playlist ${this.playlist.name}`, { position: this.message_position });
+                    this.messageService.success(`Música ${track.name} removida da playlist ${this.playlist.name}`, {
+                        position: this.message_position
+                    });
                 },
                 error => {
                     this.deleting_track = false;
@@ -196,13 +212,16 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     reorderPlaylistTracks(range_start, range_length, insert_before) {
+        console.log(range_start, range_length, insert_before);
         this.spotifyService.put('playlists_tracks', { playlist_id: this.playlist.id }, {
             range_start: range_start,
             range_length: range_length,
             insert_before: insert_before
         }).subscribe(
             response => {
-                this.messageService.success(`A ordem das música da playlist ${this.playlist.name} foi alterada`, { position: this.message_position });
+                this.messageService.success(`A ordem das música da playlist ${this.playlist.name} foi alterada`, {
+                    position: this.message_position
+                });
             },
             error => {}
         );
@@ -215,10 +234,12 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     addNewPlaylist(playlist_name) {
-        if (playlist_name !== null && playlist_name !== "") {
+        if (playlist_name !== null && playlist_name !== '') {
             this.spotifyService.post('user_playlists', { user_id: sessionStorage.user_id }, { name: playlist_name }).subscribe(
                 response => {
-                    this.messageService.success(`Playlist ${playlist_name} foi adicionada`, { position: this.message_position });
+                    this.messageService.success(`Playlist ${playlist_name} foi adicionada`, {
+                        position: this.message_position
+                    });
                     this.my_playlists = [];
                     this.getMyPlaylists();
                 },
@@ -228,11 +249,11 @@ export class PlaylistEditorComponent implements OnInit {
     }
 
     playSearchTrack(track) {
-        this.playerComponent.playTrack(track.uri);
+        this.myapp.playerComponent.playTrack(track.uri);
     }
-    
+
     playPlaylistTrack(track, i) {
-        this.playerComponent.playContext(this.playlist.uri, { position: i });
+        this.myapp.playerComponent.playContext(this.playlist.uri, { position: i });
     }
 
 }

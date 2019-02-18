@@ -29,7 +29,7 @@
                 // Ready
                 window['player'].addListener('ready', ({ device_id }) => {
                     window['player_device_id'] = device_id;
-                    console.log('Ready with Device ID', device_id);
+                    resolve();
                 });
         
                 // Not Ready
@@ -39,7 +39,7 @@
         
                 // Connect to the player!
                 window['player'].connect().then(() => {
-                    resolve();
+                    console.log('Spotify conected')
                 });
             })
         }

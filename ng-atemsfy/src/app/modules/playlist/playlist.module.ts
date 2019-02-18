@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { PlaylistComponent } from './playlist.component';
 import { PlaylistSearchComponent } from './playlist-search/playlist-search.component';
 import { PlaylistEditorComponent } from './playlist-editor/playlist-editor.component';
-import { PlayerComponent } from './player/player.component';
 
 // route
 import { PlaylistRoutingModule } from './playlist-routing.module';
@@ -16,23 +15,20 @@ import { PlaylistRoutingModule } from './playlist-routing.module';
 import { AppMaterialModule } from '../../app.material';
 
 @NgModule({
-	imports: [
-		CommonModule,
-		RouterModule,
-		PlaylistRoutingModule,
-		AppMaterialModule,
-		FormsModule
-	],
-	exports: [],
-	declarations: [
-		PlaylistComponent,
-		PlaylistSearchComponent,
-		PlaylistEditorComponent,
-		PlayerComponent
-	],
-	providers: [
-		PlayerComponent
-	]
+    imports: [
+        CommonModule,
+        RouterModule,
+        PlaylistRoutingModule,
+        AppMaterialModule,
+        FormsModule
+    ],
+    exports: [],
+    declarations: [
+        PlaylistComponent,
+        PlaylistSearchComponent,
+        PlaylistEditorComponent
+    ],
+    providers: []
 })
 export class PlaylistModule {
 

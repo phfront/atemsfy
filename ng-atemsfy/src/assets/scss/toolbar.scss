@@ -1,8 +1,14 @@
+$atemsfy-toolbar-background: #1db954;
+
 .atemsfy-toolbar {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 60px;
     align-items: center;
-    background: #1db954;
+    background: $atemsfy-toolbar-background;
 }
 
 .atemsfy-toolbar-logo {
@@ -18,4 +24,8 @@
 
 .atemsfy-toolbar-title {
     font-size: 30px;
+}
+
+.header-space {
+    flex-grow: 1;
 }

@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../core/services/spotify/spotify.service';
 import { MosaicService } from '../../core/services/mosaic/mosaic.service';
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
 
     constructor(
         public spotifyService: SpotifyService,
-        public mosaicService: MosaicService
+        public mosaicService: MosaicService,
+        public myapp: AppComponent
     ) { }
 
     ngOnInit() {
@@ -29,6 +31,7 @@ export class HomeComponent implements OnInit {
                 console.log(error);
             }
         );
+        this.myapp.startPlayer();
     }
 
     getUserInfo() {

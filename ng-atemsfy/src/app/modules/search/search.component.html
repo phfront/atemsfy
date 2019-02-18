@@ -1,42 +1,112 @@
-<input type="text" name="search_q" [(ngModel)]="search_q" (keyup)="search($event)">
-<button (click)="search(false)">Search</button>
-
-<div *ngIf="results.albums">
-	<h1>albums</h1>
-	<div style="display: flex; flex-wrap: wrap;">
-		<div *ngFor="let album of results.albums.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-			<img *ngFor="let image of album.images" [src]="image.url" style="width: 50px; height: 50px;">
-			<p>{{ album.name }}</p>
-		</div>
-	</div>
+<div class="mosaic-scroll">
+    <div class="mosaic">
+        <div *ngFor="let img of mosaic_images"
+            [style.width]="mosaicService.getMosaicSize()"
+            [style.height]="mosaicService.getMosaicSize()"
+        >
+            <img [src]="img" >
+        </div>
+    </div>
 </div>
 
-<div *ngIf="results.artists">
-	<h1>artists</h1>
-	<div style="display: flex; flex-wrap: wrap;">
-		<div *ngFor="let artist of results.artists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-			<img *ngFor="let image of artist.images" [src]="image.url" style="width: 50px; height: 50px;">
-			<p>{{ artist.name }}</p>
-		</div>
-	</div>
-</div>
+<div class="mosaic-overlay-shadow"></div>
 
-<div *ngIf="results.playlists">
-	<h1>playlists</h1>
-	<div style="display: flex; flex-wrap: wrap;">
-		<div *ngFor="let playlist of results.playlists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-			<img *ngFor="let image of playlist.images" [src]="image.url" style="width: 50px; height: 50px;">
-			<p>{{ playlist.name }}</p>
-		</div>
-	</div>
-</div>
+<div class="mosaic-content">
+    <div class="div-input-search">
+        <input class="input-search" type="text" placeholder="Pesquise músicas, albuns, playlists e artistas"
+            [(ngModel)]="search.value" (keyup)="callSearch()">
+    </div>
+    <div class="search-content">
 
-<div *ngIf="results.tracks">
-	<h1>tracks</h1>
-	<div style="display: flex; flex-wrap: wrap;">
-		<div *ngFor="let track of results.tracks.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-			<img *ngFor="let image of track.album.images" [src]="image.url" style="width: 50px; height: 50px;">
-			<p>{{ track.name }}</p>
-		</div>
-	</div>
+        <div class="search-content-type">
+            <div class="search-title">Músicas</div>
+            <div class="search-content-type-container">
+                <div *ngFor="let track of results.tracks.items" class="search-item search-item"
+                    [style.backgroundImage]="'url('+(track.album.images.length > 0 ? track.album.images[0].url : '')+')'">
+                    <div class="search-item-actions">
+                        <i class="search-item-actions-icon fa fa-play" (click)="playTrack(track)"></i>
+                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
+                    </div>
+                    <div class="search-item-name">
+                        <div>{{ track.name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-content-type">
+            <div class="search-title">Álbuns</div>
+            <div class="search-content-type-container">
+                <div *ngFor="let album of results.albums.items" class="search-item search-item"
+                    [style.backgroundImage]="'url('+(album.images.length > 0 ? album.images[0].url : '')+')'">
+                    <div class="search-item-actions">
+                        <i class="search-item-actions-icon fa fa-play" (click)="playContext(album)"></i>
+                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
+                    </div>
+                    <div class="search-item-name">
+                        <div>{{ album.name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-content-type">
+            <div class="search-title">Artistas</div>
+            <div class="search-content-type-container">
+                <div *ngFor="let artist of results.artists.items" class="search-item search-item"
+                    [style.backgroundImage]="'url('+(artist.images.length > 0 ? artist.images[0].url : '')+')'">
+                    <div class="search-item-actions">
+                        <i class="search-item-actions-icon fa fa-play" (click)="playArtist(artist)"></i>
+                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
+                    </div>
+                    <div class="search-item-name">
+                        <div>{{ artist.name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-content-type">
+            <div class="search-title">Playlists</div>
+            <div class="search-content-type-container">
+                <div *ngFor="let playlist of results.playlists.items" class="search-item search-item"
+                    [style.backgroundImage]="'url('+(playlist.images.length > 0 ? playlist.images[0].url : '')+')'">
+                    <div class="search-item-actions">
+                        <i class="search-item-actions-icon fa fa-play" (click)="playContext(playlist)"></i>
+                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
+                    </div>
+                    <div class="search-item-name">
+                        <div>{{ playlist.name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div *ngIf="results.albums">
+            
+            <div class="search-content-type-container">
+                <div class="search-item" *ngFor="let album of results.albums.items">
+                    <img *ngFor="let image of album.images" [src]="image.url" style="width: 50px; height: 50px;">
+                    <p>{{ album.name }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="results.artists">
+            
+            <div class="search-content-type-container">
+                <div *ngFor="let artist of results.artists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+                    <img *ngFor="let image of artist.images" [src]="image.url" style="width: 50px; height: 50px;">
+                    <p>{{ artist.name }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div *ngIf="results.playlists">
+            
+            <div class="search-content-type-container">
+                <div *ngFor="let playlist of results.playlists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
+                    <img *ngFor="let image of playlist.images" [src]="image.url" style="width: 50px; height: 50px;">
+                    <p>{{ playlist.name }}</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
 </div>

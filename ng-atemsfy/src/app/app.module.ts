@@ -15,6 +15,7 @@ import { RedirectComponent } from './core/services/auth/redirect/redirect.compon
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { SearchComponent } from './modules/search/search.component';
+import { PlayerComponent } from './modules/player/player.component';
 
 // modules
 import { PlaylistModule } from './modules/playlist/playlist.module';
@@ -25,7 +26,8 @@ import { PlaylistModule } from './modules/playlist/playlist.module';
         RedirectComponent,
         HomeComponent,
         LoginComponent,
-        SearchComponent
+        SearchComponent,
+        PlayerComponent
     ],
     imports: [
         BrowserModule,
@@ -35,7 +37,9 @@ import { PlaylistModule } from './modules/playlist/playlist.module';
         FormsModule,
         PlaylistModule
     ],
-    providers: [],
+    providers: [
+        PlayerComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
