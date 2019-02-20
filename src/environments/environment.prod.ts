@@ -37,5 +37,6 @@ export const environment = {
         user_current_payback: () => `https://api.spotify.com/v1/me/player/currently-playing`,
         available_devices: () => `https://api.spotify.com/v1/me/player/devices`,
         user_playback: () => `https://api.spotify.com/v1/me/player/play`,
+        shuffle: () => `https://api.spotify.com/v1/me/player/shuffle`,
     }
 };

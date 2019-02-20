@@ -13,6 +13,8 @@
                     <i *ngIf="playerComponent.player_control.paused" (click)="resume()" class="fa fa-play player-controls-icon"></i>
                     <i *ngIf="!playerComponent.player_control.paused" (click)="pause()" class="fa fa-pause player-controls-icon"></i>
                     <i (click)="forward()" class="fa fa-step-forward player-controls-icon"></i>
+                    <i (click)="shuffle()" class="fas fa-random player-controls-icon"
+                        [style.color]="playerComponent.player_control.shuffle ? '#0b7932' : ''"></i>
                 </div>
                 <div class="player-controls-volume">
                     <input (change)="setVolume()" [(ngModel)]="playerComponent.player_control.volume" class="player-controls-volume-slider" type="range" step="0.01" value="1" min="0" max="1">
