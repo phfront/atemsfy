@@ -15,6 +15,7 @@ export class PlayerComponent implements OnInit {
         state_interval: undefined,
         percent_bar: '0%',
         paused: true,
+        shuffle: false,
         volume: 0
     };
     playerComponent = PlayerComponent;
@@ -58,6 +59,7 @@ export class PlayerComponent implements OnInit {
                                     if (state2) {
                                         PlayerComponent.player_control.paused = state2.paused;
                                         PlayerComponent.player_control.percent_bar = `${(100 * state2.position) / state2.duration}%`;
+                                        PlayerComponent.player_control.shuffle = state2.shuffle;
                                     }
                                 });
                             }, 1000);
@@ -119,6 +121,16 @@ export class PlayerComponent implements OnInit {
 
     public forward() {
         window['player'].nextTrack().then(() => { });
+    }
+
+    public shuffle() {
+        PlayerComponent.player_control.shuffle = !PlayerComponent.player_control.shuffle;
+        this.spotifyService.put('shuffle', {}, {}, {
+            state: PlayerComponent.player_control.shuffle
+        }).subscribe(
+            response => { },
+            error => { }
+        )
     }
 
     public setVolume() {
