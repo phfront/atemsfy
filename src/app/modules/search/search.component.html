@@ -13,9 +13,13 @@
 
 <div class="mosaic-content">
     <div class="div-input-search">
-        <input class="input-search" type="text" placeholder="Pesquise músicas, albuns, playlists e artistas"
-            [(ngModel)]="search.value" (keyup)="callSearch()">
+        <!-- <input class="input-search" type="text" placeholder="Pesquise músicas, albuns, playlists e artistas" > -->
+        <div class="expand-input-container">
+            <input class="expand-input" type="text" [(ngModel)]="search.value" (keyup)="callSearch()" required>
+            <div class="expand-input-bar"></div>
+        </div>
     </div>
+
     <div class="search-content">
 
         <div class="search-content-type">
