@@ -1,10 +1,104 @@
-.input-search {
+$input-width: 30px;
+$input-padding: 10px;
+$input-height: 50px;
+$input-font-size: 20px;
+$input-bar-width: 5px;
+$input-bar-height: 20px;
+$input-bar-margin-top: $input-height - 4px;
+$input-bar-margin-left: -5px;
+$input-color: white;
+$input-aniamtion-time: 0.3s;
+
+// small
+$input-width-small: 10px;
+$input-height-small: 30px;
+$input-font-size-small: 15px;
+$input-bar-width-small: 3px;
+$input-bar-height-small: 15px;
+$input-bar-margin-top-small: $input-height-small - 4px;
+$input-bar-margin-left-small: -3px;
+
+.expand-input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.expand-input {
+    width: $input-width;
+    height: $input-height;
+    color: $input-color;
+    border: 3px solid;
+    font-size: $input-font-size;
+    text-align: center;
     background: none;
-    width: calc(100% - 10px);
-    height: 20px;
+    border-radius: 40px;
+    padding: 0px $input-padding;
+    transition: width $input-aniamtion-time ease-in-out;
+}
+
+.expand-input:hover {
     outline: none;
-    border: 0px;
-    border-bottom: 1px solid white;
-    color: white;
-    padding: 5px;
+    width: 100%;
+}
+
+.expand-input:focus {
+    outline: none;
+    width: 100%;
+}
+
+.expand-input:valid {
+    outline: none;
+    width: 100%;
+}
+
+.expand-input-bar {
+    width: $input-bar-width;
+    height: $input-bar-height;
+    background: $input-color;
+    transform: rotate(135deg);
+    margin-top: $input-bar-margin-top;
+    margin-left: $input-bar-margin-left;
+}
+
+// small
+.expand-input-container-small {
+    display: flex;
+    justify-content: center;
+}
+
+.expand-input-small {
+    width: $input-width-small;
+    height: $input-height-small;
+    color: $input-color;
+    border: 3px solid;
+    font-size: $input-font-size-small;
+    text-align: center;
+    background: none;
+    border-radius: 40px;
+    padding: 0px $input-padding;
+    transition: width $input-aniamtion-time ease-in-out;
+}
+
+.expand-input-small:hover {
+    outline: none;
+    width: 100%;
+}
+
+.expand-input-small:focus {
+    outline: none;
+    width: 100%;
+}
+
+.expand-input-small:valid {
+    outline: none;
+    width: 100%;
+}
+
+.expand-input-bar-small {
+    width: $input-bar-width-small;
+    height: $input-bar-height-small;
+    background: $input-color;
+    transform: rotate(135deg);
+    margin-top: $input-bar-margin-top-small;
+    margin-left: $input-bar-margin-left-small;
 }

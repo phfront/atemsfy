@@ -6,7 +6,11 @@
             <div class="atemsfy-toggle-item" style="text-decoration: line-through; opacity: 0.5;">Spotify</div>
         </div>
         <div class="div-search">
-            <input class="input-search" placeholder="Filtrar" [(ngModel)]="playlists_filter.text" />
+            <!-- <input class="input-search" placeholder="Filtrar" [(ngModel)]="playlists_filter.text" /> -->
+            <div class="expand-input-container-small">
+                <input class="expand-input-small" type="text" [(ngModel)]="playlists_filter.text" required>
+                <div class="expand-input-bar-small"></div>
+            </div>
         </div>
         <div class="side-nav-items">
             <div class="div-new-playlist">
@@ -39,7 +43,11 @@
             <div class="search-content">
                 <div class="playlist-container-title">Músicas do Spotify</div>
                 <div class="div-search">
-                    <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()">
+                    <!-- <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()"> -->
+                    <div class="expand-input-container-small">
+                        <input class="expand-input-small" type="text" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()" required>
+                        <div class="expand-input-bar-small"></div>
+                    </div>
                 </div>
                 <div class="track-container">
                     <div *ngIf="loading.search_tracks" class="loading-tracks">
@@ -77,7 +85,11 @@
             <div class="track-content">
                 <div class="playlist-container-title">Músicas da playlist</div>
                 <div class="div-search">
-                    <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="playlists_tracks_search.value">
+                    <!-- <input class="input-search" type="text" placeholder="Pesquisa" [(ngModel)]="playlists_tracks_search.value"> -->
+                    <div class="expand-input-container-small">
+                        <input class="expand-input-small" type="text" [(ngModel)]="playlists_tracks_search.value" required>
+                        <div class="expand-input-bar-small"></div>
+                    </div>
                 </div>
                 <div class="track-container">
                     <div *ngIf="loading.playlist_tracks" class="loading-tracks">
