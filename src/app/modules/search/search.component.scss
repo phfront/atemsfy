@@ -105,3 +105,55 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+// expand
+input[type=checkbox] {
+    display: none;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+}
+
+label .fa-chevron-up {
+    display: none;
+    margin-right: 5px;
+}
+
+label .fa-chevron-down {
+    display: initial;
+    margin-right: 5px;
+}
+
+.expand {
+    transform: scaleY(0);
+    transform-origin: top;
+    height: 0;
+	overflow: hidden;
+    transition: transform 0.5s;
+}
+
+#toggle-track:checked ~ #expand-track,
+#toggle-album:checked ~ #expand-album,
+#toggle-artist:checked ~ #expand-artist,
+#toggle-playlist:checked ~ #expand-playlist
+{
+    height: auto;
+    transform: scaleY(1);
+}
+
+#toggle-track:checked ~ #label-track .fa-chevron-up,
+#toggle-album:checked ~ #label-album .fa-chevron-up,
+#toggle-artist:checked ~ #label-artist .fa-chevron-up,
+#toggle-playlist:checked ~ #label-playlist .fa-chevron-up {
+    display: initial;
+}
+
+#toggle-track:checked ~ #label-track .fa-chevron-down,
+#toggle-album:checked ~ #label-album .fa-chevron-down,
+#toggle-artist:checked ~ #label-artist .fa-chevron-down,
+#toggle-playlist:checked ~ #label-playlist .fa-chevron-down
+{
+    display: none;
+}

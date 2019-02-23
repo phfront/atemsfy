@@ -22,59 +22,78 @@
 
     <div class="search-content">
 
-        <div class="search-content-type">
-            <div class="search-title">Músicas</div>
-            <div class="search-content-type-container">
-                <div *ngFor="let track of results.tracks.items" class="search-item search-item"
-                    [style.backgroundImage]="'url('+(track.album.images.length > 0 ? track.album.images[0].url : '')+')'">
-                    <div class="search-item-actions">
-                        <i class="search-item-actions-icon fa fa-play" (click)="playTrack(track)"></i>
-                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
-                    </div>
-                    <div class="search-item-name">
-                        <div>{{ track.name }}</div>
-                    </div>
+        <input id="toggle-track" type="checkbox" checked>
+        <label class="search-title" id="label-track" for="toggle-track">
+            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-chevron-down"></i>
+            Músicas
+        </label>
+        <div id="expand-track" class="expand search-content-type-container">
+            <div *ngIf="results.tracks.items.length === 0 && search.value.length > 0 && !search.running">
+                <i class="far fa-sad-tear"></i>
+                Nenhuma música encontrada
+                <i class="far fa-sad-tear"></i>
+            </div>
+            <div *ngFor="let track of results.tracks.items" class="search-item"
+                [style.backgroundImage]="'url('+(track.album.images.length > 0 ? track.album.images[0].url : '')+')'">
+                <div class="search-item-actions">
+                    <i class="search-item-actions-icon fa fa-play" (click)="playTrack(track)"></i>
+                    <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
+                </div>
+                <div class="search-item-name">
+                    <div>{{ track.name }}</div>
                 </div>
             </div>
         </div>
-        <div class="search-content-type">
-            <div class="search-title">Álbuns</div>
-            <div class="search-content-type-container">
-                <div *ngFor="let album of results.albums.items" class="search-item search-item"
-                    [style.backgroundImage]="'url('+(album.images.length > 0 ? album.images[0].url : '')+')'">
-                    <div class="search-item-actions">
-                        <i class="search-item-actions-icon fa fa-play" (click)="playContext(album)"></i>
-                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
-                    </div>
-                    <div class="search-item-name">
-                        <div>{{ album.name }}</div>
-                    </div>
+
+        <input id="toggle-album" type="checkbox">
+        <label class="search-title" id="label-album" for="toggle-album">
+            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-chevron-down"></i>
+            Álbuns
+        </label>
+        <div id="expand-album" class="expand search-content-type-container">
+            <div *ngFor="let album of results.albums.items" class="search-item search-item"
+                [style.backgroundImage]="'url('+(album.images.length > 0 ? album.images[0].url : '')+')'">
+                <div class="search-item-actions">
+                    <i class="search-item-actions-icon fa fa-play" (click)="playContext(album)"></i>
+                </div>
+                <div class="search-item-name">
+                    <div>{{ album.name }}</div>
                 </div>
             </div>
         </div>
-        <div class="search-content-type">
-            <div class="search-title">Artistas</div>
-            <div class="search-content-type-container">
-                <div *ngFor="let artist of results.artists.items" class="search-item search-item"
-                    [style.backgroundImage]="'url('+(artist.images.length > 0 ? artist.images[0].url : '')+')'">
-                    <div class="search-item-actions">
-                        <i class="search-item-actions-icon fa fa-play" (click)="playArtist(artist)"></i>
-                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
-                    </div>
-                    <div class="search-item-name">
-                        <div>{{ artist.name }}</div>
-                    </div>
+
+        <input id="toggle-artist" type="checkbox">
+        <label class="search-title" id="label-artist" for="toggle-artist">
+            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-chevron-down"></i>
+            Artistas
+        </label>
+        <div id="expand-artist" class="expand search-content-type-container">
+            <div *ngFor="let artist of results.artists.items" class="search-item search-item"
+                [style.backgroundImage]="'url('+(artist.images.length > 0 ? artist.images[0].url : '')+')'">
+                <div class="search-item-actions">
+                    <i class="search-item-actions-icon fa fa-play" (click)="playArtist(artist)"></i>
+                </div>
+                <div class="search-item-name">
+                    <div>{{ artist.name }}</div>
                 </div>
             </div>
         </div>
-        <div class="search-content-type">
-            <div class="search-title">Playlists</div>
+
+        <input id="toggle-playlist" type="checkbox">
+        <label class="search-title" id="label-playlist" for="toggle-playlist">
+            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-chevron-down"></i>
+            Playlists
+        </label>
+        <div id="expand-playlist" class="expand search-content-type-container">
             <div class="search-content-type-container">
                 <div *ngFor="let playlist of results.playlists.items" class="search-item search-item"
                     [style.backgroundImage]="'url('+(playlist.images.length > 0 ? playlist.images[0].url : '')+')'">
                     <div class="search-item-actions">
                         <i class="search-item-actions-icon fa fa-play" (click)="playContext(playlist)"></i>
-                        <!-- <i class="search-item-actions-icon fa fa-plus"></i> -->
                     </div>
                     <div class="search-item-name">
                         <div>{{ playlist.name }}</div>
@@ -83,34 +102,5 @@
             </div>
         </div>
 
-        <!-- <div *ngIf="results.albums">
-            
-            <div class="search-content-type-container">
-                <div class="search-item" *ngFor="let album of results.albums.items">
-                    <img *ngFor="let image of album.images" [src]="image.url" style="width: 50px; height: 50px;">
-                    <p>{{ album.name }}</p>
-                </div>
-            </div>
-        </div>
-        
-        <div *ngIf="results.artists">
-            
-            <div class="search-content-type-container">
-                <div *ngFor="let artist of results.artists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-                    <img *ngFor="let image of artist.images" [src]="image.url" style="width: 50px; height: 50px;">
-                    <p>{{ artist.name }}</p>
-                </div>
-            </div>
-        </div>
-        
-        <div *ngIf="results.playlists">
-            
-            <div class="search-content-type-container">
-                <div *ngFor="let playlist of results.playlists.items" style="border: 1px solid black; margin: 10px; padding: 10px;">
-                    <img *ngFor="let image of playlist.images" [src]="image.url" style="width: 50px; height: 50px;">
-                    <p>{{ playlist.name }}</p>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>

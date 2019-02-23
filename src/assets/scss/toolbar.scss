@@ -1,4 +1,5 @@
 $atemsfy-toolbar-background: #1db954;
+$mobile-breaker: 450px;
 
 .atemsfy-toolbar {
     display: flex;
@@ -15,6 +16,7 @@ $atemsfy-toolbar-background: #1db954;
     width: 50px;
     height: 50px;
     margin: 0px 5px;
+    cursor: pointer;
 }
 
 .atemsfy-toolbar-logo img {
@@ -24,6 +26,10 @@ $atemsfy-toolbar-background: #1db954;
 
 .atemsfy-toolbar-title {
     font-size: 30px;
+
+    @media screen and (max-width: $mobile-breaker) {
+        display: none;
+    }
 }
 
 .header-space {

@@ -22,6 +22,10 @@ $atemsfy-button-player-padding: 5px;
     top: 6px;
 }
 
+.atemsfy-button:disabled {
+    opacity: 0.5;
+}
+
 .atemsfy-button:active, .atemsfy-button:focus {
     outline: 0;
 }

@@ -28,7 +28,8 @@ export class PlaylistEditorComponent implements OnInit {
     playlists_tracks = [];
     available_tracks_search = {
         value: '',
-        observer: new Subject()
+        observer: new Subject(),
+        selected: []
     };
     playlists_tracks_search = {
         value: ''
@@ -37,9 +38,11 @@ export class PlaylistEditorComponent implements OnInit {
     loading = {
         playlist: false,
         playlist_tracks: false,
-        search_tracks: false
+        search_tracks: false,
+        modal_saving: false
     };
     message_position = 'bottom-left';
+    showModal = false;
 
     constructor(
         public spotifyService: SpotifyService,
@@ -254,6 +257,53 @@ export class PlaylistEditorComponent implements OnInit {
 
     playPlaylistTrack(track, i) {
         this.myapp.playerComponent.playContext(this.playlist.uri, { position: i });
+    }
+
+    selectTrack(track) {
+        let index = this.available_tracks_search.selected.indexOf(track);
+        if (index === -1) {
+            this.available_tracks_search.selected.push(track);
+        } else {
+            this.available_tracks_search.selected.splice(index, 1);
+        }
+    }
+
+    findTrackInSelectedList(track) {
+        return this.available_tracks_search.selected.indexOf(track) > -1;
+    }
+
+    hasTrackSelected() {
+        return this.available_tracks_search.selected.length;
+    }
+
+    modalSearch() {
+        this.showModal = true;
+    }
+
+    closeModal(save) {
+        if (save) {
+            this.loading.modal_saving = true;
+            this.spotifyService.post('playlists_tracks', {
+                playlist_id: this.playlist.id
+            }, {
+                uris: this.available_tracks_search.selected.map(track => track.uri)
+            }).subscribe(
+                response => {
+                    this.messageService.success(`Músicas adicionadas na playlist ${this.playlist.name}`, {
+                        position: this.message_position
+                    });
+                    this.loading.modal_saving = false;
+                    this.showModal = false;
+                    this.getPlaylist(this.playlist.id);
+                },
+                error => {
+                    this.loading.modal_saving = false;
+                    this.showModal = false;
+                }
+            );
+        } else {
+            this.showModal = false;
+        }
     }
 
 }
