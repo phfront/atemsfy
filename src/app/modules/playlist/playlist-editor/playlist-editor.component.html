@@ -39,7 +39,7 @@
                 <span *ngFor="let n of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" class="line line-{{ n }}"></span>
             </div>
         </div>
-        <div *ngIf="playlist" class="content-title">{{ playlist.name }}</div>
+        <div *ngIf="playlist && !is_mobile" class="content-title">{{ playlist.name }}</div>
         <div *ngIf="playlist" class="playlist-container">
             <div class="search-content">
                 <div class="playlist-container-title">Músicas do Spotify</div>
@@ -85,7 +85,10 @@
             <div class="track-content">
                 <div class="playlist-container-title">Músicas da playlist</div>
                 <div class="div-search div-search-playlist">
-                    <button class="button-add-track atemsfy-button atemsfy-button-secondary" (click)="modalSearch()">Adicionar músicas</button>
+                    <button class="button-add-track atemsfy-button atemsfy-button-secondary" (click)="modalSearch()">
+                        <i class="fas fa-plus"></i>
+                        músicas
+                    </button>
                     <div class="div-search-input expand-input-container-small">
                         <input class="expand-input-small" type="text" [(ngModel)]="playlists_tracks_search.value" required>
                         <div class="expand-input-bar-small"></div>
@@ -135,7 +138,7 @@
 <div *ngIf="showModal" class="modal-add-tracks">
     <div class="search-content-modal">
         <div class="playlist-container-title-modal">Músicas do Spotify</div>
-        <div class="div-search">
+        <div class="div-search div-search-modal">
             <div class="expand-input-container-small">
                 <input class="expand-input-small" type="text" [(ngModel)]="available_tracks_search.value" (keyup)="availableTracksSeach()" required>
                 <div class="expand-input-bar-small"></div>

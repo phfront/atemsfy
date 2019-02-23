@@ -2,7 +2,8 @@
 $atemsfy-messages-margin: 10px;
 $atemsfy-message-margin: 3px;
 $atemsfy-message-padding: 10px;
-$atemsfy-message-width: 300px;
+$atemsfy-message-width: 60vw;
+$atemsfy-message-max-width: 300px;
 $atemsfy-message-height-vertical: 100px;
 $border-radius: 20px;
 
@@ -168,43 +169,37 @@ $error-background-bar-hide: #901212;
 .atemsfy-messages-top-left .atemsfy-message {
     flex-direction: column-reverse;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-top-right .atemsfy-message {
     flex-direction: column-reverse;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-bottom-left .atemsfy-message {
     flex-direction: column;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-bottom-right .atemsfy-message {
     flex-direction: column;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-top-center .atemsfy-message {
     flex-direction: column-reverse;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-bottom-center .atemsfy-message {
     flex-direction: column;
     width: $atemsfy-message-width;
-    min-width: $atemsfy-message-width;
-    max-width: $atemsfy-message-width;
+    max-width: $atemsfy-message-max-width;
 }
 
 .atemsfy-messages-left-center .atemsfy-message {

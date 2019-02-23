@@ -1,3 +1,5 @@
+$mobile-breaker: 1000px;
+
 .track-in-list {
     height: 60px;
     display: flex;
@@ -7,6 +9,10 @@
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    
+    @media screen and (max-width: $mobile-breaker) {
+        height: 40px;
+    }
 }
 
 .track-in-list:hover {
@@ -17,6 +23,11 @@
     width: 60px;
     height: 60px;
     background-size: cover;
+
+    @media screen and (max-width: $mobile-breaker) {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .track-in-list-info-player {
@@ -32,6 +43,10 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+
+    @media screen and (max-width: $mobile-breaker) {
+        height: 40px;
+    }
 }
 
 .track-in-list-action-remove {
@@ -89,6 +104,11 @@
     background: none;
     opacity: 0;
     cursor: pointer;
+
+    @media screen and (max-width: $mobile-breaker) {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .track-in-list-play-button:hover {
