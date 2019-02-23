@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/app/core/services/spotify/spotify.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-player',
@@ -16,9 +17,49 @@ export class PlayerComponent implements OnInit {
         percent_bar: '0%',
         paused: true,
         shuffle: false,
-        volume: 0
+        volume: 0,
+        volume_backup: 0.5
     };
     playerComponent = PlayerComponent;
+
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) { 
+        if (event.keyCode === 173) { // AudioVolumeMute
+            if (PlayerComponent.player_control.volume === 0) {
+                PlayerComponent.player_control.volume = PlayerComponent.player_control.volume_backup;
+            } else {
+                PlayerComponent.player_control.volume = 0;
+            }
+            this.setVolume();
+        } else if (event.keyCode === 174) { // AudioVolumeDown
+            if (PlayerComponent.player_control.volume > 0) {
+                PlayerComponent.player_control.volume -= 0.1;
+                if (PlayerComponent.player_control.volume < 0) {
+                    PlayerComponent.player_control.volume = 0;
+                }
+                this.setVolume();
+            }
+        } else if (event.keyCode === 175) { // AudioVolumeUp
+            if (PlayerComponent.player_control.volume < 1) {
+                PlayerComponent.player_control.volume += 0.1;
+                if (PlayerComponent.player_control.volume > 1) {
+                    PlayerComponent.player_control.volume = 1;
+                }
+                this.setVolume();
+            }
+        } else if (event.keyCode === 176) { // MediaTrackNext
+            this.forward();
+        } else if (event.keyCode === 177) { // MediaTrackPrevious
+            this.backward();
+        } else if (event.keyCode === 179) { // MediaPlayPause
+            if (PlayerComponent.player_control.paused) {
+                this.resume();
+            } else {
+                this.pause();
+            }
+            PlayerComponent.player_control.paused = !PlayerComponent.player_control.paused;
+        }
+    }
 
     constructor(
         public spotifyService: SpotifyService
@@ -51,7 +92,6 @@ export class PlayerComponent implements OnInit {
                 };
                 window['player'].addListener('player_state_changed', (
                     state => {
-                        console.log(state);
                         PlayerComponent.track = state.track_window.current_track;
                         if (PlayerComponent.player_control.state_interval === undefined) {
                             PlayerComponent.player_control.state_interval = setInterval(() => {
@@ -68,6 +108,7 @@ export class PlayerComponent implements OnInit {
                 );
                 window['player'].getVolume().then(volume => {
                     PlayerComponent.player_control.volume = volume;
+                    PlayerComponent.player_control.volume_backup = volume;
                 });
                 window['player_ready'] = true;
                 document.getElementById('player_initializing').remove();
@@ -134,6 +175,9 @@ export class PlayerComponent implements OnInit {
     }
 
     public setVolume() {
+        if (PlayerComponent.player_control.volume > 0) {
+            PlayerComponent.player_control.volume_backup = PlayerComponent.player_control.volume;
+        }
         window['player'].setVolume(PlayerComponent.player_control.volume).then(() => { });
     }
 
