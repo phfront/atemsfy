@@ -1,3 +1,5 @@
+$mobile-breaker: 1000px;
+
 .button-size {
     font-weight: bold;
     font-size: 20px;
@@ -14,6 +16,8 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    height: calc(100vh - 60px);
+    overflow: auto;
 }
 
 .home-welcome {
@@ -21,6 +25,10 @@
     font-size: 50px;
     text-align: center;
     margin-bottom: 30px;
+
+    @media screen and (max-width: $mobile-breaker) {
+        font-size: 6vw;
+    }
 }
 
 .home-content-info {
@@ -31,6 +39,10 @@
     border: 1px solid #ffffff;
     padding: 30px;
     border-radius: 10px;
+    
+    @media screen and (max-width: $mobile-breaker) {
+        flex-direction: column;
+    }
 }
 
 .user-info-image {
@@ -38,6 +50,14 @@
     width: 200px;
     height: 200px;
     margin-bottom: 50px;
+    
+    @media screen and (max-width: $mobile-breaker) {
+        width: 50%;
+        height: 50%;
+        margin-bottom: 10px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 .user-info-line {
@@ -47,6 +67,10 @@
 .home-buttons {
     display: flex;
     flex-direction: column;
+    
+    @media screen and (max-width: $mobile-breaker) {
+        margin-top: 20px;
+    }
 }
 
 .home-button {

@@ -15,13 +15,14 @@ export class SearchComponent implements OnInit {
     search = {
         value: '',
         backup_value: '',
+        running: false,
         observer: new Subject()
     };
     results: any = {
-        albums: [],
-        artists: [],
-        playlists: [],
-        tracks: []
+        albums: { items: [] },
+        artists: { items: [] },
+        playlists: { items: [] },
+        tracks: { items: [] }
     };
     mosaic_images;
 
@@ -48,6 +49,7 @@ export class SearchComponent implements OnInit {
     }
 
     callSearch() {
+        this.search.running = true;
         this.search.observer.next();
     }
 
@@ -61,9 +63,13 @@ export class SearchComponent implements OnInit {
             }).subscribe(
                 response => {
                     this.results = response;
+                    console.log(this.results);
+                    this.search.running = false;
                 },
                 error => { }
             );
+        } else {
+            this.search.running = false;
         }
     }
 
