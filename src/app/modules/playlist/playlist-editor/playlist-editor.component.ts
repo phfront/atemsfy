@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // services
 import { SpotifyService } from '../../../core/services/spotify/spotify.service';
@@ -43,16 +44,24 @@ export class PlaylistEditorComponent implements OnInit {
     };
     message_position = 'bottom-left';
     showModal = false;
+    mobile_breaker = '1000px';
+    is_mobile = false;
 
     constructor(
         public spotifyService: SpotifyService,
         public messageService: MessageService,
-        public myapp: AppComponent
+        public myapp: AppComponent,
+        public breakpointObserver: BreakpointObserver
     ) { }
 
     ngOnInit() {
         this.getMyPlaylists();
         this.initSearch();
+
+        this.breakpointObserver.observe([`(max-width: ${this.mobile_breaker})`])
+        .subscribe((state: BreakpointState) => {
+            this.is_mobile = state.matches;
+        });
     }
 
     getMyPlaylists(params = {}) {

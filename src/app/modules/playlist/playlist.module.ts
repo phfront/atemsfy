@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LayoutModule } from '@angular/cdk/layout';
 
 // modules
 import { PlaylistComponent } from './playlist.component';
@@ -20,7 +21,8 @@ import { AppMaterialModule } from '../../app.material';
         RouterModule,
         PlaylistRoutingModule,
         AppMaterialModule,
-        FormsModule
+        FormsModule,
+        LayoutModule
     ],
     exports: [],
     declarations: [

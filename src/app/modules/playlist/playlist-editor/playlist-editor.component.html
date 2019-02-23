@@ -108,7 +108,7 @@
                         <div *ngIf="playlists_tracks.length === 0" class="no-item">
                             Arraste as músicas aqui
                         </div>
-                        <div *ngFor="let item of playlistsTracksFilter(); let i = index" cdkDrag>
+                        <div *ngFor="let item of playlistsTracksFilter(); let i = index" cdkDrag [cdkDragDisabled]="is_mobile">
                             <div class="track-in-list">
                                 <div class="track-in-list-image" [style.backgroundImage]="'url('+item.album.images[0].url+')'">
                                     <button (click)="playPlaylistTrack(item, i)" class="track-in-list-play-button"><i class="fa fa-play"></i></button>
