@@ -8,15 +8,15 @@ import { HomeComponent } from './modules/home/home.component';
 import { SearchComponent } from './modules/search/search.component';
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/login', pathMatch: 'full' },
-	{ path: 'redirect', component: RedirectComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'home', component: HomeComponent },
-	{ path: 'search', component: SearchComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'redirect', component: RedirectComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

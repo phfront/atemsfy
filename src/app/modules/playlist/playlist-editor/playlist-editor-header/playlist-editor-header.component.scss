@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  background: gray;
+  padding: 10px;
+}
+
+.header-item {
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0px;
+  }
+}
+
+.modal {
+  width: 60vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.loading-search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playlists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .playlist {
+    width: 90%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}

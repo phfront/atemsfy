@@ -1,0 +1,30 @@
+<button class="header-item atemsfy-button atemsfy-button-primary atemsfy-button-small" (click)="openModal()">
+  Selecionar playlist
+</button>
+<button class="header-item atemsfy-button atemsfy-button-primary atemsfy-button-small" disabled>
+  Criar playlist
+</button>
+<button class="header-item atemsfy-button atemsfy-button-primary atemsfy-button-small" disabled>
+  Importar playlist
+</button>
+<app-atemsfy-modal [show]="showModalSelectPlaylist" (close)="closeModal()">
+  <div class="modal">
+    <div class="expand-input-container-small">
+      <input
+      class="expand-input-small"
+      type="text"
+      [formControl]="playlistSearch"
+      placeholder="Filtrar playlists"
+      />
+      <div class="expand-input-bar-small"></div>
+    </div>
+    <div *ngIf="showPlaylistSearchLoading" class="loading-search">
+      <app-atemsfy-loading [text]="'Buscando playlists'"></app-atemsfy-loading>
+    </div>
+    <div class="playlists" *ngIf="!showPlaylistSearchLoading">
+      <div class="playlist" *ngFor="let playlist of filteredPlaylists" (click)="sendAndClose(playlist)">
+        {{ playlist.name }}
+      </div>
+    </div>
+  </div>
+</app-atemsfy-modal>

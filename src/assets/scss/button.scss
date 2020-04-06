@@ -1,5 +1,7 @@
 $atemsfy-button-padding-top-bottom: 10px;
 $atemsfy-button-padding-left-right: 20px;
+$atemsfy-button-small-padding-top-bottom: 3px;
+$atemsfy-button-small-padding-left-right: 10px;
 $atemsfy-button-player-padding: 5px;
 
 .atemsfy-button {
@@ -11,6 +13,10 @@ $atemsfy-button-player-padding: 5px;
     margin-bottom: 6px;
     opacity: 0.9;
     cursor: pointer;
+}
+
+.atemsfy-button-small {
+  padding: $atemsfy-button-small-padding-top-bottom $atemsfy-button-small-padding-left-right;
 }
 
 .atemsfy-button:hover {

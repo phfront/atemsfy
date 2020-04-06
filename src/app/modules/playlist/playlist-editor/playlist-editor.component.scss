@@ -1,4 +1,4 @@
-$mobile-breaker: 1000px;
+$mobile-breaker: 900px;
 
 /*
     @media screen and (max-width: $mobile-breaker) {
@@ -7,290 +7,291 @@ $mobile-breaker: 1000px;
 */
 
 .container {
-    padding: 10px;
-    position: fixed;
-    top: 60px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
+  padding: 10px;
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
 
-    @media screen and (max-width: $mobile-breaker) {
-        overflow: auto;
-        flex-direction: column;
-        align-items: center;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    overflow: auto;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .side-nav {
-    height: 100%;
-    width: 250px;
+  height: 100%;
+  width: 250px;
 
-    @media screen and (max-width: $mobile-breaker) {
-        width: 100%;
-        height: 150px;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 100%;
+    height: 150px;
+  }
 }
 
 .side-nav-items {
-    margin-top: 10px;
-    height: calc(100% - 100px);
-    overflow: auto;
-    
-    @media screen and (max-width: $mobile-breaker) {
-        margin-top: 0px;
-        height: 151px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
+  margin-top: 10px;
+  height: calc(100% - 100px);
+  overflow: auto;
+
+  @media screen and (max-width: $mobile-breaker) {
+    margin-top: 0px;
+    height: 151px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }
 
 .my-playlists {
-    @media screen and (max-width: $mobile-breaker) {
-        width: 100%;
-        height: 90px;
-        overflow: auto;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 100%;
+    height: 90px;
+    overflow: auto;
+  }
 }
 
 .div-search {
-    padding: 10px;
+  padding: 10px;
 
-    @media screen and (max-width: $mobile-breaker) {
-        width: 50%;
-        padding: 0px;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 50%;
+    padding: 0px;
+  }
 }
 
 .div-search-playlist {
-    @media screen and (max-width: $mobile-breaker) {
-        display: flex;
-        width: 100%;
-        align-items: center;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
 }
 
 .button-add-track {
-    display: none;
-    width: 50%;
-    height: 35px;
+  display: none;
+  width: 50%;
+  height: 35px;
 
-    @media screen and (max-width: $mobile-breaker) {
-        display: initial;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    display: initial;
+  }
 }
 
 .div-search-input {
-    @media screen and (max-width: $mobile-breaker) {
-        flex-grow: 1;
-        flex-grow: 1;
-        margin: 0px 10px;
-        width: 50%;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    flex-grow: 1;
+    flex-grow: 1;
+    margin: 0px 10px;
+    width: 50%;
+  }
 }
 
 .div-new-playlist {
-    @media screen and (max-width: $mobile-breaker) {
-        width: 50%;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 50%;
+  }
 }
 
 .div-new-playlist button {
-    width: 100%;
-    height: 35px;
+  width: 100%;
+  height: 35px;
 }
 
 .atemsfy-toggle {
-    width: 100%;
-    height: 50px;
-    justify-content: center;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
 }
 
 .content {
-    flex-grow: 1;
-    padding: 10px;
-    width: calc(100% - 270px);
+  flex-grow: 1;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 
-    @media screen and (max-width: $mobile-breaker) {
-        width: 100%;
-        padding: 0px;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 100%;
+    padding: 0px;
+  }
 }
 
 .content-title {
-    height: 40px;
-    font-size: 25px;
-    text-align: center;
+  height: 40px;
+  font-size: 25px;
+  text-align: center;
 }
 
 .playlist-container {
-    display: flex;
-    height: calc(100% - 40px);
+  display: flex;
+  height: calc(100% - 40px);
 }
 
 .search-content {
-    width: 50%;
-    padding: 10px;
+  width: 50%;
+  padding: 10px;
 
-    @media screen and (max-width: $mobile-breaker) {
-        display: none;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    display: none;
+  }
 }
 
 .track-content {
-    width: 50%;
-    padding: 10px;
+  width: 50%;
+  padding: 10px;
 
-    @media screen and (max-width: $mobile-breaker) {
-        width: 100%;
-        padding: 0px;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    width: 100%;
+    padding: 0px;
+  }
 }
 
 .playlist-container-title {
-    height: 30px;
-    text-align: center;
+  height: 30px;
+  text-align: center;
 
-    @media screen and (max-width: $mobile-breaker) {
-        display: none;
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    display: none;
+  }
 }
 
 .track-container {
-    height: calc(100% - 70px);
-    overflow: auto;
+  height: calc(100% - 150px);
+  overflow: auto;
 
-    @media screen and (max-width: $mobile-breaker) {
-        height: calc(100vh - 291px);
-    }
+  @media screen and (max-width: $mobile-breaker) {
+    height: calc(100vh - 291px);
+  }
 }
 
 // drag drop
 
 .container-drag-drop {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .item-drag-drop {
-    width: 50%;
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
+  width: 50%;
+  margin: 10px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .track-img-preview {
-    width: 150px;
-    height: 150px;
+  width: 150px;
+  height: 150px;
 }
 
 .example-list {
-    min-height: 50px;
-    overflow: hidden;
-    display: block;
+  min-height: 50px;
+  overflow: hidden;
+  display: block;
 
-    .no-item {
-        width: 100%;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  .no-item {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        @media screen and (max-width: $mobile-breaker) {
-            display: none;
-        }
+    @media screen and (max-width: $mobile-breaker) {
+      display: none;
     }
+  }
 }
 
 .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
-    opacity: 0;
+  opacity: 0;
 }
 
 .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .example-box:last-child {
-    border: none;
+  border: none;
 }
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 // drag drop
 
 // loading
 .loading-playlist {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
 }
 
 .loading-tracks {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .loading-modal-saving {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 // loading
 
 // modal
 .playlist-container-title-modal {
-    margin-top: 10px;
-    text-align: center;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .modal-add-tracks {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 .track-container-modal {
-    height: calc(100vh - 100px);
-    overflow: auto;
+  height: calc(100vh - 100px);
+  overflow: auto;
 }
 
 .track-selected-modal {
-    background: #414141;
+  background: #414141;
 }
 
 .modal-actions {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .modal-actions button {
-    flex-grow: 1;
-    margin: 0px 5px;
+  flex-grow: 1;
+  margin: 0px 5px;
 }
 
 .div-search-modal {
-    width: 100%;
+  width: 100%;
 }
 
 .expand-input-container-small {
-    margin: 10px;
+  margin: 10px;
 }
 // modal

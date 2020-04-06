@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { AtemsfyPaginatorComponent } from './atemsfy-paginator.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('AtemsfyPaginatorComponent', () => {
+  let component: AtemsfyPaginatorComponent;
+  let fixture: ComponentFixture<AtemsfyPaginatorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ AtemsfyPaginatorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(AtemsfyPaginatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

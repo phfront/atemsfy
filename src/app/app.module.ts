@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpClient,
+} from '@angular/common/http';
 
 // material
 import { AppMaterialModule } from './app.material';
@@ -19,27 +23,27 @@ import { PlayerComponent } from './modules/player/player.component';
 
 // modules
 import { PlaylistModule } from './modules/playlist/playlist.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        RedirectComponent,
-        HomeComponent,
-        LoginComponent,
-        SearchComponent,
-        PlayerComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AppMaterialModule,
-        HttpClientModule,
-        FormsModule,
-        PlaylistModule
-    ],
-    providers: [
-        PlayerComponent
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    RedirectComponent,
+    HomeComponent,
+    LoginComponent,
+    SearchComponent,
+    PlayerComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AppMaterialModule,
+    HttpClientModule,
+    FormsModule,
+    PlaylistModule,
+    SharedModule
+  ],
+  providers: [PlayerComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

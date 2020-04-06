@@ -1,0 +1,6 @@
+<div class="modal-container" *ngIf="show">
+  <div class="modal">
+    <button (click)="close.emit()">x</button>
+    <ng-content></ng-content>
+  </div>
+</div>

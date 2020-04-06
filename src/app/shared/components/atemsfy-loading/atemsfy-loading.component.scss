@@ -41,18 +41,18 @@ $bar-space-between: 2px;
 .atemsfy-loading .line-18 { animation-delay: 800ms; }
 .atemsfy-loading .line-19 { animation-delay: 900ms; }
 
-@keyframes bar-animation { 
-  0% { 
+@keyframes bar-animation {
+  0% {
     opacity: 1;
     height: $bar-height-bigger;
   }
-  50% { 
+  50% {
     opacity: 0;
     height: $bar-height;
   }
-  100% { 
+  100% {
     opacity: 1;
     height: $bar-height-bigger;
-  }  
+  }
 
 }

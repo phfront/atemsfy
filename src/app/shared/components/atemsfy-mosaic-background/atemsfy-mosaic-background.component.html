@@ -1,0 +1,11 @@
+<div class="mosaic-scroll">
+  <div class="mosaic">
+    <div
+      *ngFor="let img of mosaic_images"
+      [style.width]="mosaicService.getMosaicSize()"
+      [style.height]="mosaicService.getMosaicSize()"
+    >
+      <img [src]="img" />
+    </div>
+  </div>
+</div>
