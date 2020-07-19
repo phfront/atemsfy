@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MessageService } from '../message/message.service';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class SpotifyService {
     public http: HttpClient,
     public router: Router,
     public messageService: MessageService
-  ) {}
+  ) { }
 
   getHeader(body = {}) {
     return {
@@ -131,7 +131,7 @@ export class SpotifyService {
           );
           this.router.navigate(['/']);
         }
-      } catch (err) {}
+      } catch (err) { }
       return throwError(error); // Let the app keep running by returning an empty result.
     };
   }

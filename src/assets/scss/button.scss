@@ -5,108 +5,110 @@ $atemsfy-button-small-padding-left-right: 10px;
 $atemsfy-button-player-padding: 5px;
 
 .atemsfy-button {
-    padding: $atemsfy-button-padding-top-bottom $atemsfy-button-padding-left-right;
-    border-radius: 100px;
-    position: relative;
-    top: 0;
-    margin-top: 0;
-    margin-bottom: 6px;
-    opacity: 0.9;
-    cursor: pointer;
+  padding: $atemsfy-button-padding-top-bottom $atemsfy-button-padding-left-right;
+  border-radius: 100px;
+  position: relative;
+  top: 0;
+  margin-top: 0;
+  margin-bottom: 6px;
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 .atemsfy-button-small {
-  padding: $atemsfy-button-small-padding-top-bottom $atemsfy-button-small-padding-left-right;
+  padding: $atemsfy-button-small-padding-top-bottom
+    $atemsfy-button-small-padding-left-right;
 }
 
 .atemsfy-button:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .atemsfy-button:active {
-    box-shadow: none;
-    top: 6px;
+  box-shadow: none;
+  top: 6px;
 }
 
 .atemsfy-button:disabled {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
-.atemsfy-button:active, .atemsfy-button:focus {
-    outline: 0;
+.atemsfy-button:active,
+.atemsfy-button:focus {
+  outline: 0;
 }
 
 .atemsfy-button-primary {
-    background: linear-gradient(
-        to bottom,
-        #1de954 0%,
-        #1dd954 17%,
-        #1dc954 33%,
-        #1db954 67%,
-        #1da954 83%,
-        #1d9954 100%
-    );
-    border: 0px;
-    color: white;
-    box-shadow: 0px 6px 0px #1d6954;
+  background: linear-gradient(
+    to bottom,
+    #1de954 0%,
+    #1dd954 17%,
+    #1dc954 33%,
+    #1db954 67%,
+    #1da954 83%,
+    #1d9954 100%
+  );
+  border: 0px;
+  color: white;
+  box-shadow: 0px 6px 0px #1d6954;
 }
 
 .atemsfy-button-secondary {
-    background: linear-gradient(
-        to bottom,
-        #a3a3a3 0%,
-        #939393 17%,
-        #838383 33%,
-        #737373 67%,
-        #636363 83%,
-        #535353 100%
-    );
-    border: 0px;
-    color: white;
-    box-shadow: 0px 6px 0px #434343;
+  background: linear-gradient(
+    to bottom,
+    #a3a3a3 0%,
+    #939393 17%,
+    #838383 33%,
+    #737373 67%,
+    #636363 83%,
+    #535353 100%
+  );
+  border: 0px;
+  color: white;
+  box-shadow: 0px 6px 0px #434343;
 }
 
 .atemsfy-button-alternative {
-    background: linear-gradient(
-        to bottom,
-        #23aaf3 0%,
-        #1ea2e9 17%,
-        #1294da 33%,
-        #0f7eb9 67%,
-        #0c6291 83%,
-        #0b557c 100%
-    );
-    border: 0px;
-    color: white;
-    box-shadow: 0px 6px 0px #083f5c;
+  background: linear-gradient(
+    to bottom,
+    #23aaf3 0%,
+    #1ea2e9 17%,
+    #1294da 33%,
+    #0f7eb9 67%,
+    #0c6291 83%,
+    #0b557c 100%
+  );
+  border: 0px;
+  color: white;
+  box-shadow: 0px 6px 0px #083f5c;
 }
 
 .atemsfy-button-white {
-    background: linear-gradient(
-        to bottom,
-        #ffffff 0%,
-        #fdfdfd 17%,
-        #fbfbfb 33%,
-        #f9f9f9 67%,
-        #f7f7f7 83%,
-        #f5f5f5 100%
-    );
-    border: 0px;
-    color: #1db954;
-    box-shadow: 0px 6px 0px #c7c7c7;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #fdfdfd 17%,
+    #fbfbfb 33%,
+    #f9f9f9 67%,
+    #f7f7f7 83%,
+    #f5f5f5 100%
+  );
+  border: 0px;
+  color: #1db954;
+  box-shadow: 0px 6px 0px #c7c7c7;
 }
 
 .atemsfy-button-warning {
-    background: linear-gradient(
-        to bottom,
-        #fb1212 0%,
-        #eb1212 17%,
-        #db1212 33%,
-        #cb1212 67%,
-        #bb1212 83%,
-        #ab1212 100%
-    );
-    border: 0px;
-    color: white;
-    box-shadow: 0px 6px 0px #7b1212;
+  background: linear-gradient(
+    to bottom,
+    #fb1212 0%,
+    #eb1212 17%,
+    #db1212 33%,
+    #cb1212 67%,
+    #bb1212 83%,
+    #ab1212 100%
+  );
+  border: 0px;
+  color: white;
+  box-shadow: 0px 6px 0px #7b1212;
 }

@@ -1,22 +1,20 @@
-// @import '../../../node_modules/ngx-select-dropdown/dist/';
-
-@import 'button.scss';
-@import 'track.scss';
-@import 'toolbar.scss';
-@import 'mosaic.scss';
-@import 'content.scss';
-@import 'toggle.scss';
-@import 'playlist.scss';
-@import 'input.scss';
-@import 'scrollbar.scss';
-@import 'messages.scss';
-@import 'player.scss';
+@import "button.scss";
+@import "track.scss";
+@import "toolbar.scss";
+@import "mosaic.scss";
+@import "content.scss";
+@import "toggle.scss";
+@import "playlist.scss";
+@import "input.scss";
+@import "scrollbar.scss";
+@import "messages.scss";
+@import "player.scss";
 
 @font-face {
-    font-family: 'montserrat';
-    src: url('src/assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+  font-family: "montserrat";
+  src: url(../fonts/Montserrat/Montserrat-Bold.ttf);
 }
 
 * {
-    font-family: montserrat;
+  font-family: montserrat;
 }

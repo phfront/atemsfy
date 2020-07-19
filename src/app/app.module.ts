@@ -24,6 +24,7 @@ import { PlayerComponent } from './modules/player/player.component';
 // modules
 import { PlaylistModule } from './modules/playlist/playlist.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     FormsModule,
     PlaylistModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [PlayerComponent],
   bootstrap: [AppComponent],

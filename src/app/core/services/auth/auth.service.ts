@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
 import { Subject } from 'rxjs';
 import { SpotifyService } from '../spotify/spotify.service';
 import { take } from 'rxjs/operators';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root',
